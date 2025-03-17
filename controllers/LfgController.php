@@ -45,6 +45,8 @@ class LfgController extends Controller
             ],
         ]);
 
+        Yii::$app->runAction('lfg-cleanup/index');
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
