@@ -1,83 +1,132 @@
 @import "variables.css";
 @import "main.css";
 
-/* Contenitore principale della pagina di creazione */
-.lfg-create {
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #1f1f1f;
-  border: 1px solid #333;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  max-width: 600px;
+/* Contenitore principale della pagina di creazione LFG */
+.lfg-create-page {
+  max-width: 900px; /* Larghezza massima della sezione */
+  margin: 2rem auto; /* Centra orizzontalmente */
+  padding: 0 1rem; /* Padding orizzontale */
+  color: #fff;
 }
 
 /* Titolo della pagina */
-.lfg-create h1 {
-  font-size: 2.2rem;
-  margin-bottom: 2rem;
+.page-title {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
   text-align: center;
-  font-weight: 700;
-  color: #fff;
 }
 
-/* Stile del form */
-.lfg-form form {
+/* Contenitore per il form */
+.lfg-form-container {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  justify-content: center;
 }
 
-.lfg-form .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+/* Card che contiene il form */
+.lfg-form-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.lfg-form label {
-  color: #ddd;
+/* Spaziatura e stile per i gruppi di form */
+.lfg-form-card .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.lfg-form-card .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #ccc;
   font-weight: 500;
 }
 
-.lfg-form input,
-.lfg-form textarea {
-  padding: 0.5rem;
-  border: 1px solid #333;
-  border-radius: 4px;
-  background-color: #2a2a2a;
+/* Campi di input, textarea, e select */
+.lfg-form-card .form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
+  border-radius: 5px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  width: 100%;
 }
 
-.lfg-form input:focus,
-.lfg-form textarea:focus,
-.lfg-form select:focus {
-  outline: none;
+.lfg-form-card .form-control:focus {
+  background-color: rgba(255, 255, 255, 0.15);
   border-color: var(--primary-color);
+  box-shadow: none;
+  outline: none;
 }
 
-/* Pulsante di invio */
-.lfg-form .btn-submit {
-  background-color: var(--primary-color);
-  color: #000;
-  border: none;
-  border-radius: 4px;
-  padding: 0.6rem 1.2rem;
+/* Messaggi di errore */
+.lfg-form-card .help-block {
+  color: #ff6b6b;
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+}
+
+/* Stile per i dropdown personalizzati, se serve (radio, select, etc.) */
+.lfg-form-card .status-radio .radio,
+.lfg-form-card .status-radio .radio-inline {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Bottone di submit */
+.lfg-form-card .btn.btn-success,
+.lfg-form-card .btn.btn-primary {
   font-weight: 600;
-  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.lfg-form .btn-submit:hover {
+.lfg-form-card .btn.btn-success {
+  background-color: var(--primary-color);
+  border: none;
+  color: #000;
+}
+
+.lfg-form-card .btn.btn-success:hover {
   background-color: #fff;
   color: #000;
 }
 
-/* RESPONSIVE */
+.lfg-form-card .btn.btn-primary {
+  background-color: var(--primary-color);
+  border: none;
+  color: #000;
+}
+
+.lfg-form-card .btn.btn-primary:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+/* Forza lo stile degli option nei dropdown all'interno della card del form */
+.lfg-form-card select.form-control option {
+  background-color: #353535; /* Sfondo nero */
+  color: #fff; /* Testo bianco, per una migliore leggibilità */
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .lfg-create {
-    padding: 1rem;
+  .lfg-create-page {
+    margin: 1rem;
+    padding: 0 0.5rem;
   }
-  .lfg-create h1 {
+  .page-title {
     font-size: 1.8rem;
+  }
+  .lfg-form-card {
+    padding: 1.5rem;
   }
 }

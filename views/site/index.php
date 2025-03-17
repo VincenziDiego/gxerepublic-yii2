@@ -34,7 +34,6 @@ if (isset($newsDataProvider)) {
 
     <!-- Contenuto Principale -->
     <main class="body-content container main-content">
-
         <!-- Sezione Info (Chi siamo, Cosa Facciamo, Unisciti a Noi) -->
         <section class="modern-info row">
             <!-- Chi Siamo -->
@@ -63,10 +62,8 @@ if (isset($newsDataProvider)) {
                     <h2>Cosa Facciamo</h2>
                     <div class="info-content">
                         <p>
-                            Affrontiamo i contenuti endgame di Destiny 2 con raid epici, dungeon avventurosi e
-                            sessioni
-                            di raid day one. Organizziamo speedrun e offriamo guide e supporto per ogni sfida, come
-                            veri
+                            Affrontiamo i contenuti endgame di Destiny 2 con raid epici, dungeon avventurosi e sessioni
+                            di raid day one. Organizziamo speedrun e offriamo guide e supporto per ogni sfida, come veri
                             Guardiani dello spazio.
                         </p>
                     </div>
@@ -85,8 +82,9 @@ if (isset($newsDataProvider)) {
                     <div class="info-content">
                         <p>
                             Cerchiamo nuovi Guardiani pronti a condividere avventure cosmiche e a spingersi oltre i
-                            limiti. Che tu sia un veterano o un new light, in GXE Republic troverai sempre un gruppo
-                            pronto ad accoglierti. Unisciti a noi e scopri un universo di possibilità.
+                            limiti.
+                            Che tu sia un veterano o un new light, in GXE Republic troverai sempre un gruppo pronto ad
+                            accoglierti. Unisciti a noi e scopri un universo di possibilità.
                         </p>
                     </div>
                     <div class="info-footer">
@@ -104,7 +102,6 @@ if (isset($newsDataProvider)) {
                 <header class="section-header text-center">
                     <h2>Ultime Notizie</h2>
                 </header>
-
                 <?= \yii\widgets\ListView::widget([
                     'dataProvider' => $newsDataProvider,
                     'itemView' => '_news_item',
@@ -153,7 +150,6 @@ if (isset($newsDataProvider)) {
         </section>
     </main>
 </div>
-
 <?php
 $this->registerJsFile('@web/js/scroll-reveal.js', ['depends' => [\app\assets\AppAsset::class]]);
 ?>

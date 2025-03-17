@@ -28,12 +28,15 @@ class Lfg extends ActiveRecord
     public function rules()
     {
         return [
-            [['leader_id', 'activity_type', 'max_players', 'start_time'], 'required'],
+            [['leader_id', 'max_players', 'start_time'], 'required'], // rimosso activity_type
             [['leader_id', 'max_players', 'status'], 'integer'],
             [['description', 'current_players', 'reserve_players'], 'string'],
             [['start_time', 'created_at', 'updated_at'], 'safe'],
+            // Se usi ancora activity_type, puoi ad esempio renderlo opzionale:
             [['activity_type'], 'string', 'max' => 100],
             ['start_time', 'validateStartTime'],
+            // Aggiungi regole per i nuovi campi, se necessario:
+            [['activity_type_id', 'activity_id'], 'integer'],
         ];
     }
 
@@ -75,6 +78,8 @@ class Lfg extends ActiveRecord
             'start_time' => 'Data e ora di inizio',
             'created_at' => 'Creato il',
             'updated_at' => 'Ultimo aggiornamento',
+            'activity_type_id' => 'Tipo di Attività',
+            'activity_id' => 'Attività',
         ];
     }
 
@@ -180,7 +185,7 @@ class Lfg extends ActiveRecord
 
     public function autoClose()
     {
-        // Se start_time è definito e l'orario attuale è maggiore o uguale a start_time
+        // Se start_time è definito, e l'orario attuale è maggiore o uguale allo start_time,
         // e lo status non è già chiuso (0), allora chiudi l'LFG.
         if ($this->start_time !== null && strtotime($this->start_time) <= time() && $this->status != 0) {
             $this->status = 0;

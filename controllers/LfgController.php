@@ -7,22 +7,31 @@ use app\models\Lfg;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use mdm\admin\components\AccessControl;
+use yii\filters\VerbFilter;
 
 class LfgController extends Controller
 {
     public function behaviors()
     {
-        return [
-            // Puoi implementare i filtri di accesso per autenticare gli utenti
-            'access' => [
-                'class' => AccessControl::className(),
-            ],
-        ];
+        return array_merge(
+            parent::behaviors(),
+            [
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'delete' => ['POST'],
+                    ],
+                ],
+                'access' => [
+                    'class' => AccessControl::className(),
+                ],
+            ]
+        );
     }
 
     public function actionIndex()
     {
-        // Recupera tutti gli LFG e chiudi quelli il cui start_time è passato
+        // Recupera tutti gli LFG e applica autoClose ad ognuno
         $lfgs = Lfg::find()->orderBy(['start_time' => SORT_ASC])->all();
         foreach ($lfgs as $lfg) {
             $lfg->autoClose();
@@ -41,7 +50,6 @@ class LfgController extends Controller
         ]);
     }
 
-
     public function actionCreate()
     {
         $model = new Lfg();
@@ -50,8 +58,23 @@ class LfgController extends Controller
             $model->leader_id = Yii::$app->user->id;
             // Imposta il leader come primo giocatore in current_players, se desiderato
             $model->current_players = Yii::$app->user->identity->bungieid;
+
+            // Se è stata selezionata un'attività, recupera il record e imposta il titolo (activity_type) come il nome dell'attività
+            if ($model->activity_id) {
+                $activity = \app\models\Activity::findOne($model->activity_id);
+                if ($activity) {
+                    $model->activity_type = $activity->name;
+                    // Se max_players non è stato modificato manualmente, imposta il valore predefinito dall'attività
+                    if (empty($model->max_players)) {
+                        $model->max_players = $activity->default_players;
+                    }
+                }
+            }
+
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                Yii::error("Errore nel salvataggio del modello: " . json_encode($model->errors), __METHOD__);
             }
         }
 
@@ -204,4 +227,26 @@ class LfgController extends Controller
         }
         return $this->redirect(['index']);
     }
+
+    public function actionGetActivities($category_id)
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $activities = \app\models\Activity::find()->where(['activity_type_id' => $category_id])->all();
+        return \yii\helpers\ArrayHelper::map($activities, 'id', 'name');
+    }
+
+    public function actionGetActivityDetails($activity_id)
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $activity = \app\models\Activity::findOne($activity_id);
+        if ($activity) {
+            return [
+                'default_players' => $activity->default_players,
+                'name' => $activity->name,
+            ];
+        }
+        return [];
+    }
 }
+
+
