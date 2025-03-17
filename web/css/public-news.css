@@ -1,0 +1,156 @@
+@import "variables.css";
+@import "main.css";
+
+/* Container principale */
+.news-public {
+  color: #fff;
+  margin-top: 2rem;
+  padding: 0 1rem;
+}
+
+/* Header della pagina */
+.news-header h1 {
+  font-size: 2.6rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(66, 153, 225, 0.7);
+}
+
+/* CARD NEWS */
+.news-card {
+  background-color: #1f1f1f;
+  border: 1px solid #333;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+/* Effetto hover: sollevamento e ombra più intensa */
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7);
+}
+
+/* Header della card con overlay di gradient e animazione leggera */
+.news-card .card-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--dark-accent));
+  padding: 1rem 1.5rem;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+.news-card .card-header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.25);
+  transition: opacity 0.3s ease;
+}
+.news-card:hover .card-header::after {
+  opacity: 0;
+}
+
+.news-card .card-title {
+  color: var(--text-color);
+  font-size: 1.5rem;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Meta informazioni nel header */
+.card-meta {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #bbb;
+  position: relative;
+  z-index: 1;
+}
+
+/* Corpo della card */
+.news-card .card-body {
+  background-color: transparent;
+  padding: 1.5rem;
+}
+
+.news-card .card-text {
+  color: #ddd;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Footer della card */
+.news-card .card-footer {
+  background-color: #1f1f1f;
+  border-top: 1px solid #333;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+/* Stato pubblicato/bozza */
+.status-pubblicato {
+  color: #28a745;
+  font-weight: bold;
+}
+.status-bozza {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* Pulsante "Leggi" */
+.news-card .card-footer .btn.btn-primary.btn-sm {
+  background-color: var(--primary-color);
+  border: none;
+  color: #000;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  padding: 0.5rem 1rem;
+}
+.news-card .card-footer .btn.btn-primary.btn-sm:hover {
+  background-color: #fff;
+  color: #000;
+  transform: translateY(-2px);
+}
+
+/* PAGINAZIONE */
+.news-public .pagination {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+}
+.news-public .pagination .page-link {
+  color: #fff;
+  background-color: #1f1f1f;
+  border: 1px solid #333;
+  transition: background-color 0.3s ease;
+}
+.news-public .pagination .page-link:hover {
+  background-color: #333;
+}
+.news-public .pagination .active .page-link {
+  background-color: var(--primary-color);
+  color: #000;
+  border-color: var(--primary-color);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .news-header h1 {
+    font-size: 1.8rem;
+  }
+  .news-card .card-body {
+    padding: 1rem;
+  }
+  .news-card .card-title {
+    font-size: 1.2rem;
+  }
+}

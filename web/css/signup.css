@@ -1,0 +1,171 @@
+@import "variables.css";
+@import "main.css";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+/* Sfondo cosmico per la pagina di registrazione */
+body {
+  font-family: "Roboto", sans-serif;
+  background: radial-gradient(ellipse at center, #0a0a0f 0%, #1a1a2e 100%);
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Contenitore centrale per il Signup */
+.signup-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 20px;
+}
+
+/* Card di signup con effetto vetro e dettagli neon */
+.signup-card {
+  background: rgba(15, 15, 30, 0.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Effetto "stellare" decorativo */
+.signup-card::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(
+    circle,
+    var(--primary-color) 30%,
+    transparent 70%
+  );
+  opacity: 0.4;
+  transform: rotate(45deg);
+}
+
+/* Header del signup */
+.signup-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #e0e6ed;
+  text-shadow: 0 0 10px rgba(66, 153, 225, 0.8);
+}
+.signup-header p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #bbb;
+}
+
+/* Gruppi di input */
+.form-group {
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+/* Stile input con effetto neon */
+.form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.form-control:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px var(--primary-color);
+  outline: none;
+}
+
+/* Pulsante Signup in stile ovale e neon */
+.signup-btn {
+  width: 100%;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  background-color: var(--primary-color);
+  border: none;
+  color: #000;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px var(--primary-color);
+}
+.signup-btn:hover {
+  background-color: #fff;
+  box-shadow: 0 0 14px var(--primary-color);
+}
+
+/* Link per Login */
+.signup-login-link p {
+  font-size: 0.9rem;
+  color: #bbb;
+  margin-top: 1rem;
+}
+.signup-login-link a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+.signup-login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Footer (se presente nella pagina) */
+.footer {
+  background: rgba(255, 255, 255, 0.1);
+  text-align: center;
+  padding: 12px;
+  font-size: 0.85rem;
+  color: #ccc;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: auto;
+}
+.footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+.footer a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
+/* Ottimizzazioni Mobile */
+@media (max-width: 480px) {
+  .signup-card {
+    padding: 1.5rem;
+    max-width: 340px;
+  }
+  .signup-header h1 {
+    font-size: 1.6rem;
+  }
+  .form-control {
+    font-size: 0.85rem;
+    padding: 0.6rem;
+  }
+  .signup-btn {
+    font-size: 0.9rem;
+  }
+  .signup-login-link p {
+    font-size: 0.85rem;
+  }
+  .footer {
+    font-size: 0.8rem;
+    padding: 10px;
+  }
+}

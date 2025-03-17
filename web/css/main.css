@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-body);
+  font-family: "Roboto", sans-serif;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* Scroll Reveal: inizialmente gli elementi sono nascosti */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Quando l’elemento entra in vista, viene aggiunta la classe "scrolled" */
+.scroll-reveal.scrolled {
+  opacity: 1;
+  transform: translateY(0);
+}

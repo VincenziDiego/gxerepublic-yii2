@@ -1,0 +1,17 @@
+:root {
+  /* Palette ispirata a coolors.co */
+  --primary-color: #4bed9c; /* Accent principale per pulsanti, link ed evidenziazioni */
+  --secondary-color: #7be2f9; /* Accent secondario per hover o dettagli */
+  --accent-color: #ffa098; /* Per evidenziare elementi specifici */
+  --dark-accent: #5451d2; /* Usato per gradient, overlay o bordi */
+  --card-bg: #5e56bc; /* Sfondo delle card */
+  --text-color: #fff;
+  --bg-hero: linear-gradient(135deg, #5451d2, #5e56bc);
+  --bg-body: #121212; /* Colore di sfondo principale */
+
+  --box-shadow-light: 0 4px 10px rgba(0, 0, 0, 0.3);
+  --box-shadow-card: 0 2px 6px rgba(0, 0, 0, 0.4);
+  --border-radius-hero: 20px;
+  --border-radius-card: 10px;
+  --transition-speed: 0.3s;
+}

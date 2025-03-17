@@ -1,0 +1,259 @@
+@import "variables.css";
+@import "main.css";
+
+/* HEADER - Titolo e pulsante "Crea LFG" */
+.lfg-index-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+  position: relative;
+  background: linear-gradient(135deg, #5451d2, #5e56bc);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.lfg-index-header h1 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin: 0;
+  color: #fff;
+  padding: 1rem;
+  text-shadow: 0 0 8px rgba(66, 153, 225, 0.8);
+  position: relative;
+  z-index: 2;
+}
+.lfg-index-header .btn-create {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 0.85rem 1.8rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+.lfg-index-header .btn-create:hover {
+  background-color: #2ecc71;
+  transform: scale(1.05);
+}
+
+/* Primo effetto decorativo: in alto a sinistra */
+.lfg-index-header::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(
+    circle,
+    var(--primary-color) 40%,
+    transparent 60%
+  );
+  opacity: 0.6;
+  border-radius: 50%;
+  animation: pulse 4s ease-in-out infinite;
+  z-index: 1;
+}
+
+/* Secondo effetto decorativo: in basso a destra */
+.lfg-index-header::before {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  right: -15px;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(
+    circle,
+    var(--secondary-color) 40%,
+    transparent 60%
+  );
+  opacity: 0.5;
+  border-radius: 50%;
+  animation: pulse 5s ease-in-out infinite reverse;
+  z-index: 1;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+}
+
+/* Contenitore principale */
+.lfg-index {
+  color: #fff;
+  margin-top: 2rem;
+  padding: 0 1rem;
+}
+
+/* CARD LFG */
+.lfg-card {
+  background-color: #1f1f1f;
+  border: 1px solid #333;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.lfg-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7);
+}
+
+/* Decorazione sulle card */
+.lfg-card::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(
+    circle,
+    var(--primary-color) 30%,
+    transparent 70%
+  );
+  opacity: 0.4;
+  border-radius: 50%;
+  transform: rotate(20deg);
+}
+
+/* Card Body */
+.lfg-card .card-body {
+  background-color: transparent;
+  padding: 1.2rem;
+}
+.lfg-card .card-title {
+  color: var(--primary-color);
+  font-size: 1.6rem;
+  margin-bottom: 0.75rem;
+}
+.lfg-card .card-text {
+  color: #ddd;
+  line-height: 1.6;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Informazioni addizionali */
+.lfg-card .card-info {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-bottom: 0.5rem;
+}
+
+/* Footer della card: pulsanti per azioni */
+.lfg-card .card-footer {
+  background-color: #1f1f1f;
+  border-top: 1px solid #333;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  color: #999;
+}
+
+/* Pulsanti nelle card: forma ovale, area cliccabile ingrandita e effetto glow */
+.lfg-card .btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+  min-width: 90px;
+  min-height: 40px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.lfg-card .btn-join {
+  background-color: var(--primary-color);
+  color: #000;
+  box-shadow: 0 0 8px var(--primary-color);
+}
+.lfg-card .btn-join:hover {
+  background-color: #fff;
+  color: #000;
+  transform: scale(1.05);
+  box-shadow: 0 0 12px var(--primary-color);
+}
+.lfg-card .btn-info {
+  background-color: #3498db;
+  color: #fff;
+  box-shadow: 0 0 8px #3498db;
+}
+.lfg-card .btn-info:hover {
+  background-color: #2980b9;
+  box-shadow: 0 0 12px #2980b9;
+}
+.lfg-card .btn-success {
+  background-color: #28a745;
+  color: #fff;
+  box-shadow: 0 0 8px #28a745;
+}
+.lfg-card .btn-success:hover {
+  background-color: #2ecc71;
+  box-shadow: 0 0 12px #2ecc71;
+}
+.lfg-card .btn-warning {
+  background-color: #f39c12;
+  color: #000;
+  box-shadow: 0 0 8px #f39c12;
+}
+.lfg-card .btn-warning:hover {
+  background-color: #e67e22;
+  box-shadow: 0 0 12px #e67e22;
+}
+
+/* PAGINAZIONE */
+.lfg-index .pagination {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+}
+.lfg-index .pagination .page-link {
+  color: #fff;
+  background-color: #1f1f1f;
+  border: 1px solid #333;
+  padding: 0.5rem 0.75rem;
+  margin: 0 0.25rem;
+  transition: background-color 0.3s ease;
+}
+.lfg-index .pagination .page-link:hover {
+  background-color: #333;
+}
+.lfg-index .pagination .active .page-link {
+  background-color: var(--primary-color);
+  color: #000;
+  border-color: var(--primary-color);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .lfg-index-header h1 {
+    font-size: 1.8rem;
+  }
+  .lfg-card .card-body {
+    padding: 1rem;
+  }
+  .lfg-card .card-title {
+    font-size: 1.3rem;
+  }
+}

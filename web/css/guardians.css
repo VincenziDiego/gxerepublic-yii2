@@ -1,0 +1,84 @@
+/* Sezione "I Nostri Guardiani" */
+.guardians-section {
+  padding: 2rem 0;
+}
+
+.guardians-section .section-header h2 {
+  font-size: 2.4rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.guardians-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.guardian-card {
+  background: #2a2a2a;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.guardian-card:hover {
+  transform: translateY(-5px);
+}
+
+.guardian-card img.guardian-img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+}
+
+.guardian-card h3 {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.guardian-card p {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* Sezione CTA */
+.cta-section {
+  background: linear-gradient(135deg, #5451d2, #5e56bc);
+  border-radius: 12px;
+  padding: 2rem 1rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.cta-section .cta-content h2 {
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.cta-section .cta-content p {
+  color: #eee;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cta-btn {
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+  border: 2px solid var(--primary-color);
+  background: transparent;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.cta-btn:hover {
+  background: var(--primary-color);
+  color: #000;
+}
