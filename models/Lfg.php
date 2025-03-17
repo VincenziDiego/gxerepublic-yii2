@@ -37,6 +37,7 @@ class Lfg extends ActiveRecord
             ['start_time', 'validateStartTime'],
             // Aggiungi regole per i nuovi campi, se necessario:
             [['activity_type_id', 'activity_id'], 'integer'],
+            [['activity_type_id', 'activity_id'], 'required'],
         ];
     }
 
