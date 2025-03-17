@@ -68,8 +68,19 @@ $this->registerCssFile('@web/css/main.css', [
             ];
         }
 
-        if (!Yii::$app->user->isGuest && Yii::$app->user->can('user')) {
-            $rightItems[] = ['label' => 'LFG', 'url' => ['/lfg/index']];
+        if (!Yii::$app->user->isGuest && Yii::$app->user->can('user') && !Yii::$app->user->can('admin') && !Yii::$app->user->can('admin')) {
+            $rightItems[] = ['label' => 'LFG', 'url' => ['/lfg']];
+        }
+
+        if (!Yii::$app->user->isGuest && Yii::$app->user->can('admin')) {
+            $rightItems[] = [
+                'label' => 'LFG',
+                'items' => [
+                    ['label' => 'Lista LFG', 'url' => ['/lfg']],
+                    ['label' => 'Dashboard attività', 'url' => ['/activity']],
+                    ['label' => 'Dashboard tipologie attività', 'url' => ['/activity-type']],
+                ]
+            ];
         }
 
         if (!Yii::$app->user->isGuest && Yii::$app->user->can('admin')) {

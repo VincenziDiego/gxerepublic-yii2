@@ -4,6 +4,15 @@ namespace app\models;
 
 use yii\db\ActiveRecord;
 
+/**
+ * Questo è il modello per la tabella "activity".
+ *
+ * @property int $id
+ * @property int $activity_type_id ID della categoria a cui appartiene l'attività
+ * @property string $name Nome dell'attività
+ * @property int $default_players Numero di giocatori predefinito per questa attività
+ * @property string|null $description Descrizione dell'attività
+ */
 class Activity extends ActiveRecord
 {
     public static function tableName()

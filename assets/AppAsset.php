@@ -20,8 +20,8 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
-        'css/variables.css'
+        //'css/site.css',
+        //'css/variables.css'
         //'css/navbar.css',
         //'css/footer.css',
         //'css/index.css',
