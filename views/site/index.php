@@ -63,8 +63,10 @@ if (isset($newsDataProvider)) {
                     <h2>Cosa Facciamo</h2>
                     <div class="info-content">
                         <p>
-                            Affrontiamo i contenuti endgame di Destiny 2 con raid epici, dungeon avventurosi e sessioni
-                            di raid day one. Organizziamo speedrun e offriamo guide e supporto per ogni sfida, come veri
+                            Affrontiamo i contenuti endgame di Destiny 2 con raid epici, dungeon avventurosi e
+                            sessioni
+                            di raid day one. Organizziamo speedrun e offriamo guide e supporto per ogni sfida, come
+                            veri
                             Guardiani dello spazio.
                         </p>
                     </div>
