@@ -7,7 +7,7 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'News Pubblicate', 'url' => ['public']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->registerCssFile('@web/css/read-news.css', [
+$this->registerCssFile('@web/css/news-read.css', [
     'depends' => [\app\assets\AppAsset::class],
     'position' => \yii\web\View::POS_HEAD,
 ]);

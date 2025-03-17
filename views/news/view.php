@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 
 // Registra il file CSS dedicato (assicurati che il percorso sia corretto)
-$this->registerCssFile('@web/css/view-news.css', [
+$this->registerCssFile('@web/css/news-view.css', [
     'depends' => [\app\assets\AppAsset::class],
     'position' => \yii\web\View::POS_HEAD,
 ]);

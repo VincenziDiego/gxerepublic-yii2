@@ -5,7 +5,7 @@ use yii\helpers\Html;
 $this->title = 'News';
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->registerCssFile('@web/css/public-news.css', [
+$this->registerCssFile('@web/css/news-public.css', [
     'depends' => [\app\assets\AppAsset::class],
     'position' => \yii\web\View::POS_HEAD,
 ]);

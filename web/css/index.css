@@ -1,11 +1,25 @@
+/* -----------------------------
+   IMPORTAZIONE FONT E VARIABILI
+----------------------------- */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 @import "variables.css";
-@import "main.css";
 
+/* -----------------------------
+   RESET BASE
+----------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  background-color: var(--bg-body); /* se definito nelle variables.css */
+  color: var(--text-color);
   animation: fadeInPage 1s ease-out;
 }
-
 @keyframes fadeInPage {
   from {
     opacity: 0;
@@ -15,12 +29,67 @@ body {
   }
 }
 
-/* Effetto Ripple sui pulsanti */
+/* -----------------------------
+   NAVBAR (HEADER) RESPONSIVE
+----------------------------- */
+.navbar {
+  background-color: #111;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.navbar-brand {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.navbar-brand:hover {
+  color: var(--primary-color);
+}
+.navbar-menu {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.navbar-menu a {
+  color: #ccc;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
+}
+.navbar-menu a:hover {
+  color: #fff;
+}
+.navbar-toggler {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .navbar-menu {
+    display: none; /* Da gestire con JS se vuoi un menu a tendina */
+  }
+  .navbar-toggler {
+    display: block;
+  }
+}
+
+/* -----------------------------
+   EFFETTO RIPPLE SUI PULSANTI
+----------------------------- */
 .btn {
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
-
 .btn::after {
   content: "";
   position: absolute;
@@ -31,7 +100,6 @@ body {
   pointer-events: none;
   transition: transform 0.6s, opacity 1s;
 }
-
 .btn:active::after {
   transform: scale(4);
   opacity: 1;
@@ -45,8 +113,34 @@ body {
 }
 
 /* -----------------------------
-   ANIMAZIONI & KEYFRAMES
+   HERO SECTION
 ----------------------------- */
+.hero-section {
+  position: relative;
+  background: url("/uploads/high-quality-hero.jpg") no-repeat center center !important;
+  background-size: cover !important;
+  background-attachment: fixed;
+  height: 70vh; /* ridotto un po' */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: var(--border-radius-hero);
+  margin: 0 auto 1.5rem;
+  overflow: hidden;
+  padding: 0 1rem;
+  margin-top: -30px;
+}
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation: gradientShift 15s ease infinite;
+  z-index: 1;
+}
 @keyframes gradientShift {
   0% {
     background: linear-gradient(
@@ -70,7 +164,22 @@ body {
     );
   }
 }
-
+.hero-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+.hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 800px;
+  animation: fadeInDown 1s ease-out;
+}
 @keyframes fadeInDown {
   from {
     opacity: 0;
@@ -81,7 +190,75 @@ body {
     transform: translateY(0);
   }
 }
+.hero-title {
+  font-size: 3rem;
+  margin: 0;
+  color: var(--text-color);
+  text-shadow: 0 0 10px rgba(66, 153, 225, 0.8),
+    0 0 20px rgba(66, 153, 225, 0.6);
+  margin-bottom: 0.75rem;
+}
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin: 0 0 1rem;
+  color: #ddd;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+.hero-btn {
+  font-size: 1.1rem;
+  padding: 0.9rem 1.8rem;
+  border: 2px solid var(--primary-color);
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+.hero-btn:hover {
+  background: var(--primary-color);
+  color: #000;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+}
+@media (max-width: 768px) {
+  .hero-section {
+    background-attachment: scroll;
+    height: 55vh;
+    margin-bottom: 1rem;
+  }
+  .hero-title {
+    font-size: 2rem;
+  }
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  .hero-btn {
+    font-size: 0.9rem;
+    padding: 0.7rem 1.4rem;
+  }
+}
 
+/* -----------------------------
+   MAIN CONTENT & INFO BOX
+----------------------------- */
+.main-content {
+  margin-top: 1rem;
+  padding: 0 1rem;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+}
+.modern-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 1.5rem;
+}
+.modern-info > .col-md-4 {
+  flex: 1;
+  display: flex;
+  animation: fadeInUp 1s ease-out;
+}
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -92,142 +269,11 @@ body {
     transform: translateY(0);
   }
 }
-
-@keyframes rotateSlow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+@media (max-width: 768px) {
+  .modern-info > .col-md-4 {
+    flex: 1 1 100%;
   }
 }
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* -----------------------------
-   HERO SECTION CON PARALLAX & OVERLAY
------------------------------ */
-.hero-section {
-  position: relative;
-  background: url("/uploads/high-quality-hero.jpg") no-repeat center center !important;
-  background-size: cover !important;
-  background-attachment: fixed;
-  height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border-radius: var(--border-radius-hero);
-  margin: 10px auto 2rem;
-  overflow: hidden;
-}
-.hero-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  animation: gradientShift 15s ease infinite;
-}
-.hero-section::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(
-    0,
-    0,
-    0,
-    0.2
-  ); /* Overlay per effetto "particles" (opzionale: integra particles.js) */
-  z-index: 2;
-}
-.hero-content {
-  position: relative;
-  z-index: 3;
-  max-width: 800px;
-  padding: 0 1rem;
-  animation: fadeInDown 1s ease-out;
-}
-.hero-title {
-  font-size: 3.9rem;
-  margin: 0;
-  color: var(--text-color);
-  text-shadow: 0 0 10px rgba(66, 153, 225, 0.8),
-    0 0 20px rgba(66, 153, 225, 0.6);
-}
-.hero-subtitle {
-  font-size: 1.8rem;
-  margin: 1rem 0;
-  color: #ddd;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-  animation: fadeInDown 1s ease-out 0.3s;
-}
-.hero-btn {
-  font-size: 1.2rem;
-  padding: 1rem 2rem;
-  border: 2px solid var(--primary-color);
-  background: rgba(0, 0, 0, 0.3);
-  color: var(--primary-color);
-  text-decoration: none;
-  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease,
-    box-shadow 0.3s ease;
-  animation: fadeInDown 1s ease-out 0.6s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-.hero-btn:hover {
-  background: var(--primary-color);
-  color: #000;
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
-}
-
-.btn-glow {
-  position: relative;
-  background: transparent;
-  border: 2px solid #7be2f9; /* es. un ciano */
-  color: #7be2f9;
-  transition: box-shadow 0.3s ease, color 0.3s ease;
-}
-.btn-glow:hover {
-  color: #000;
-  background: #7be2f9;
-  box-shadow: 0 0 10px 2px rgba(123, 226, 249, 0.7);
-}
-
-/* -----------------------------
-   CONTENUTO PRINCIPALE & INFO CARDS
------------------------------ */
-.main-content {
-  margin-top: 2rem;
-  padding: 0 1rem;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.modern-info {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-.modern-info > .col-md-4 {
-  flex: 1;
-  display: flex;
-  animation: fadeInUp 1s ease-out;
-}
-
 .info-box {
   flex: 1;
   background: var(--bg-card);
@@ -235,8 +281,7 @@ body {
   border-radius: var(--border-radius-card);
   padding: 1.5rem;
   box-shadow: var(--box-shadow-card);
-  transition: transform var(--transition-speed) ease,
-    box-shadow var(--transition-speed) ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
   color: var(--text-color);
@@ -253,7 +298,7 @@ body {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 50%;
   transform: scale(0);
-  transition: transform var(--transition-speed) ease;
+  transition: transform 0.3s ease;
 }
 .info-box:hover::after {
   transform: scale(1.2);
@@ -263,12 +308,14 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 .info-box h2 {
-  margin-bottom: 1rem;
-  color: var(--text-color);
+  margin-bottom: 0.75rem;
+  font-size: 1.4rem;
 }
 .info-content {
   flex: 1;
   color: #ddd;
+  font-size: 0.95rem;
+  line-height: 1.4;
   margin-bottom: 1rem;
 }
 .info-footer {
@@ -278,15 +325,14 @@ body {
   display: block;
   text-align: center;
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.65rem;
   font-size: 1rem;
   font-weight: 500;
   text-decoration: none;
   border: 1px solid var(--primary-color);
   background-color: transparent;
   color: var(--primary-color);
-  transition: background var(--transition-speed) ease,
-    color var(--transition-speed) ease, transform var(--transition-speed) ease;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 .info-footer a.btn:hover {
   background-color: var(--primary-color);
@@ -298,21 +344,302 @@ body {
    SEZIONE "ULTIME NOTIZIE"
 ----------------------------- */
 .latest-news {
-  margin: 3rem 0;
-  padding: 0 1rem;
+  margin-top: 2rem; /* Spazio prima della sezione */
+  margin-bottom: 2rem; /* Spazio dopo la sezione */
 }
+
 .latest-news .section-header {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem; /* Spazio sotto il titolo */
 }
+
 .latest-news .section-header h2 {
-  font-size: 2.2rem;
-  color: var(--text-color);
-  text-shadow: 0 0 8px rgba(66, 153, 225, 0.8);
+  margin: 0; /* Rimuove eventuali margini di default */
+}
+
+.latest-news.container {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.latest-news .section-header {
+  padding-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* -----------------------------
+   NEWS CARD
+----------------------------- */
+
+.news-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  justify-content: center;
+  align-items: stretch;
+  scroll-snap-type: x mandatory;
+}
+
+.news-card-container {
+  flex: 0 0 auto;
+  width: 300px;
+  scroll-snap-align: center;
+  margin-top: 0.5rem;
+  margin-right: 1.5rem; /* Aggiunge spazio a sinistra */
+}
+
+/* Se hai definito le variabili in :root, le richiami così */
+.news-gradient-card {
+  /* Dimensioni di base (adatta a piacere) */
+  width: 300px;
+  min-height: 220px; /* Puoi aumentare se vuoi più spazio verticale */
+
+  /* Gradiente con le tue variabili */
+  background-image: linear-gradient(
+    43deg,
+    var(--dark-accent) 0%,
+    /* #5451d2 */ var(--secondary-color) 46%,
+    /* #7be2f9 */ var(--accent-color) 100% /* #ffa098 */
+  );
+
+  border-radius: var(--border-radius-card); /* 10px */
+  color: var(--text-color); /* #fff */
+  overflow: hidden;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+
+  /* Usa la velocità definita in var(--transition-speed), es. 0.3s */
+  transition: all var(--transition-speed) cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: var(--box-shadow-card); /* 0 2px 6px rgba(0, 0, 0, 0.4) */
+  margin: 0 auto 1rem;
+  cursor: pointer;
+}
+
+.news-gradient-card .card-content {
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: inherit; /* Usa var(--text-color) */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+}
+
+.news-gradient-card .card-title {
+  font-size: 1.2rem; /* Riduci o aumenta a piacere */
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+  color: inherit;
+}
+
+.news-gradient-card .card-para {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  color: inherit;
+  line-height: 1.3;
+}
+
+/* Effetto 3D al passaggio del mouse */
+.news-gradient-card:hover {
+  transform: rotateY(10deg) rotateX(10deg) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Effetto “strisciata” sulle pseudo-classi :before e :after */
+.news-gradient-card::before,
+.news-gradient-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
+  transition: transform var(--transition-speed) cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 1;
+}
+
+.news-gradient-card::before {
+  left: 0;
+}
+.news-gradient-card:hover::before {
+  transform: translateX(-100%);
+}
+
+.news-gradient-card::after {
+  right: 0;
+}
+.news-gradient-card:hover::after {
+  transform: translateX(100%);
 }
 
 @media (max-width: 768px) {
-  .modern-info > .col-md-4 {
-    flex: 1 1 100%;
+  /* Per schermi fino a 768px (tablet e mobile), 
+     cambia la direzione in colonna */
+  .news-row {
+    flex-direction: column;
+    align-items: center;
+    /* Se hai impostato overflow-x: auto, 
+       per evitare scorrimento orizzontale su mobile: */
+    overflow-x: visible;
+  }
+
+  .news-card-container {
+    width: 100%;
+    max-width: 400px; /* oppure 100% se vuoi l'intera larghezza */
+    margin: 0.5rem 0; /* margine verticale fra le card */
+  }
+}
+
+/* -----------------------------
+   GUARDIAN CARDS
+----------------------------- */
+/* Titolo uniforme a "Ultime Notizie" */
+.guardians-section {
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+.guardians-section.container {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.guardians-section .section-header h2 {
+  font-size: 2rem;
+  color: var(--text-color);
+  text-shadow: 0 0 8px rgba(66, 153, 225, 0.8);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.guardians-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.guardian-card {
+  background: #2a2a2a;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 220px;
+  height: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #3a3a3a;
+}
+.guardian-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+.guardian-card img.guardian-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+  object-fit: cover;
+  border: 2px solid var(--primary-color);
+}
+.guardian-card h3 {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  color: #fff;
+}
+.guardian-card p {
+  font-size: 0.85rem;
+  color: #ccc;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 576px) {
+  .guardian-card {
+    width: 200px;
+    height: 280px;
+  }
+}
+@media (max-width: 480px) {
+  .guardian-card {
+    width: 180px;
+    height: 260px;
+  }
+}
+
+/* -----------------------------
+   SEZIONE CTA ("Unisciti alla nostra community")
+----------------------------- */
+.cta-section {
+  background: linear-gradient(135deg, #5451d2, #5e56bc);
+  border-radius: 12px;
+  padding: 1.5rem 1rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 800px;
+}
+.cta-section .cta-content {
+  padding: 1rem;
+}
+.cta-section .cta-content h2 {
+  color: #fff;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+.cta-section .cta-content p {
+  color: #eee;
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+}
+.cta-btn {
+  font-size: 1.1rem;
+  padding: 0.9rem 1.8rem;
+  border: 2px solid var(--primary-color);
+  background: transparent;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.cta-btn:hover {
+  background: var(--primary-color);
+  color: #000;
+  transform: scale(1.03);
+}
+@media (max-width: 768px) {
+  .cta-section {
+    padding: 1rem;
+    margin: 1.5rem auto;
+  }
+  .cta-section .cta-content h2 {
+    font-size: 1.5rem;
+  }
+  .cta-btn {
+    font-size: 0.95rem;
+    padding: 0.7rem 1.4rem;
+  }
+}
+@media (max-width: 576px) {
+  .cta-section {
+    max-width: 90%;
+    padding: 1rem;
+  }
+  .cta-section .cta-content p {
+    font-size: 0.9rem;
+  }
+  .cta-btn {
+    font-size: 0.85rem;
+    padding: 0.6rem 1rem;
   }
 }

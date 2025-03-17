@@ -16,11 +16,7 @@ $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, 
 $this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
 $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/favicon.ico')]);
-$this->registerCssFile('@web/css/navbar.css', [
-    'depends' => [AppAsset::class],
-    'position' => \yii\web\View::POS_HEAD,
-]);
-$this->registerCssFile('@web/css/footer.css', [
+$this->registerCssFile('@web/css/main.css', [
     'depends' => [AppAsset::class],
     'position' => \yii\web\View::POS_HEAD,
 ]);
@@ -35,13 +31,6 @@ $this->registerCssFile('@web/css/footer.css', [
 </head>
 
 <body class="d-flex flex-column h-100 modern-body">
-    <!-- Overlay di animazione -->
-    <div class="loader-container" id="introOverlay">
-        <div class="hex-loader">
-            <div class="hex-gradient"></div>
-        </div>
-        <div class="loading-text">Loading</div>
-    </div>
     <?php $this->beginBody() ?>
 
     <header id="header">

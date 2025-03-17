@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'i
 $this->params['breadcrumbs'][] = 'Update';
 
 // Registra il CSS (lo stesso di create)
-$this->registerCssFile('@web/css/create-news.css', [
+$this->registerCssFile('@web/css/news-create.css', [
     'depends' => [\app\assets\AppAsset::class],
     'position' => \yii\web\View::POS_HEAD,
 ]);

@@ -9,7 +9,7 @@ use yii\helpers\Html;
 $this->title = 'News Dashboard';
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->registerCssFile('@web/css/index-news.css', [
+$this->registerCssFile('@web/css/news-index.css', [
     'depends' => [\app\assets\AppAsset::class],
     'position' => \yii\web\View::POS_END,
 ]);
