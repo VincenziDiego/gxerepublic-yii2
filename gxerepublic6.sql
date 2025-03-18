@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mar 14, 2025 alle 18:12
+-- Creato il: Mar 18, 2025 alle 18:25
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -24,6 +24,63 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `activity`
+--
+
+CREATE TABLE `activity` (
+  `id` int(11) NOT NULL,
+  `activity_type_id` int(11) NOT NULL COMMENT 'FK alla categoria di attività',
+  `name` varchar(100) NOT NULL COMMENT 'Nome dell''attività (titolo)',
+  `default_players` int(11) NOT NULL COMMENT 'Numero di giocatori predefinito per questa attività',
+  `description` text DEFAULT NULL COMMENT 'Descrizione dell''attività'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dump dei dati per la tabella `activity`
+--
+
+INSERT INTO `activity` (`id`, `activity_type_id`, `name`, `default_players`, `description`) VALUES
+(9, 5, 'Salvation\'s Edge', 6, 'Free the Light.'),
+(10, 5, 'Leviathan', 6, '\"Grow fat from strength.\"'),
+(11, 5, 'Leviathan, Spire of Stars', 6, 'On the wings of Icarus.'),
+(12, 5, 'Scourge of the Past', 6, 'Beneath the ruins of the Last City lies the Black Armory\'s most precious vault, now under siege by Siviks and his crew, the Kell\'s Scourge.'),
+(13, 5, 'Leviathan, Eater of Worlds', 6, '\"In the belly of the beast.\"'),
+(14, 5, 'Deep Stone Crypt', 6, 'The chains of legacy must be broken.'),
+(15, 5, 'Crown of Sorrow', 6, 'Grow [weak] with [pride].'),
+(16, 5, 'Garden of Salvation', 6, '\"The Garden calls out to you.\"'),
+(17, 5, 'King\'s Fall', 6, 'Long live the King...'),
+(18, 5, 'Vow of the Disciple', 6, 'The disciple beckons...'),
+(19, 5, 'Root of Nightmares', 6, 'a');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `activity_type`
+--
+
+CREATE TABLE `activity_type` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL COMMENT 'Nome della categoria (es. Campagna, Crogiolo, etc.)',
+  `description` text DEFAULT NULL COMMENT 'Descrizione della categoria'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dump dei dati per la tabella `activity_type`
+--
+
+INSERT INTO `activity_type` (`id`, `name`, `description`) VALUES
+(1, 'Campagna', 'Attività legata alle campagne.'),
+(2, 'Crogiolo', 'Attività del Crogiolo.'),
+(3, 'Dungeon', 'Dungeon.'),
+(4, 'Azzardo', 'Attività di Azzardo.'),
+(5, 'Raid', 'Raid.'),
+(6, 'Stagionale', 'Attività stagionali.'),
+(7, 'Avanguardia', 'Attività della Avanguardia.'),
+(8, 'Altro', 'Altre attività.');
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `auth_assignment`
 --
 
@@ -40,12 +97,7 @@ CREATE TABLE `auth_assignment` (
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 ('admin', '1', 1741767891),
 ('author', '2', 1741768198),
-('author', '9', 1741880279),
-('user', '5', 1741861436),
-('user', '6', 1741873190),
-('user', '7', 1741873262),
-('user', '8', 1741873309),
-('user', '9', 1741880206);
+('user', '10', 1742228294);
 
 -- --------------------------------------------------------
 
@@ -68,6 +120,18 @@ CREATE TABLE `auth_item` (
 --
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
+('/activity-type/*', 2, NULL, NULL, NULL, 1742227645, 1742227645),
+('/activity-type/create', 2, NULL, NULL, NULL, 1742227645, 1742227645),
+('/activity-type/delete', 2, NULL, NULL, NULL, 1742227645, 1742227645),
+('/activity-type/index', 2, NULL, NULL, NULL, 1742227645, 1742227645),
+('/activity-type/update', 2, NULL, NULL, NULL, 1742227645, 1742227645),
+('/activity-type/view', 2, NULL, NULL, NULL, 1742227645, 1742227645),
+('/activity/*', 2, NULL, NULL, NULL, 1742227645, 1742227645),
+('/activity/create', 2, NULL, NULL, NULL, 1742227645, 1742227645),
+('/activity/delete', 2, NULL, NULL, NULL, 1742227645, 1742227645),
+('/activity/index', 2, NULL, NULL, NULL, 1742227645, 1742227645),
+('/activity/update', 2, NULL, NULL, NULL, 1742227645, 1742227645),
+('/activity/view', 2, NULL, NULL, NULL, 1742227645, 1742227645),
 ('/admin/*', 2, NULL, NULL, NULL, 1741681669, 1741681669),
 ('/admin/assignment/*', 2, NULL, NULL, NULL, 1741681669, 1741681669),
 ('/admin/assignment/assign', 2, NULL, NULL, NULL, 1741681669, 1741681669),
@@ -143,6 +207,8 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 ('/lfg/*', 2, NULL, NULL, NULL, 1741876500, 1741876500),
 ('/lfg/create', 2, NULL, NULL, NULL, 1741876500, 1741876500),
 ('/lfg/delete', 2, NULL, NULL, NULL, 1741876500, 1741876500),
+('/lfg/get-activities', 2, NULL, NULL, NULL, 1742222863, 1742222863),
+('/lfg/get-activity-details', 2, NULL, NULL, NULL, 1742222863, 1742222863),
 ('/lfg/index', 2, NULL, NULL, NULL, 1741876500, 1741876500),
 ('/lfg/join', 2, NULL, NULL, NULL, 1741876500, 1741876500),
 ('/lfg/join-reserve', 2, NULL, NULL, NULL, 1741876500, 1741876500),
@@ -180,6 +246,18 @@ CREATE TABLE `auth_item_child` (
 --
 
 INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
+('admin', '/activity-type/*'),
+('admin', '/activity-type/create'),
+('admin', '/activity-type/delete'),
+('admin', '/activity-type/index'),
+('admin', '/activity-type/update'),
+('admin', '/activity-type/view'),
+('admin', '/activity/*'),
+('admin', '/activity/create'),
+('admin', '/activity/delete'),
+('admin', '/activity/index'),
+('admin', '/activity/update'),
+('admin', '/activity/view'),
 ('admin', '/admin/*'),
 ('admin', '/admin/assignment/*'),
 ('admin', '/admin/assignment/assign'),
@@ -263,6 +341,8 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 ('user', '/lfg/*'),
 ('user', '/lfg/create'),
 ('user', '/lfg/delete'),
+('user', '/lfg/get-activities'),
+('user', '/lfg/get-activity-details'),
 ('user', '/lfg/index'),
 ('user', '/lfg/join'),
 ('user', '/lfg/join-reserve'),
@@ -305,16 +385,10 @@ CREATE TABLE `lfg` (
   `status` smallint(6) NOT NULL DEFAULT 1 COMMENT 'Stato del gruppo: 1 = aperto, 0 = chiuso',
   `start_time` timestamp NULL DEFAULT NULL COMMENT 'Data e ora di inizio attività',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'Data e ora di creazione',
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT 'Data e ora di aggiornamento'
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT 'Data e ora di aggiornamento',
+  `activity_id` int(11) DEFAULT NULL COMMENT 'ID dell''attività associata',
+  `activity_type_id` int(11) DEFAULT NULL COMMENT 'ID del tipo di attività associato'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci COMMENT='Tabella per la gestione dei gruppi LFG del clan di Destiny';
-
---
--- Dump dei dati per la tabella `lfg`
---
-
-INSERT INTO `lfg` (`id`, `leader_id`, `activity_type`, `description`, `max_players`, `current_players`, `reserve_players`, `status`, `start_time`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Salvesion\'s Edge', 'SE Full // Red Chest // KWTD', 6, 'asd,test,test2,test3', 'kljasd', 0, '2025-03-13 20:00:00', '2025-03-13 11:26:35', '2025-03-14 08:25:07'),
-(9, 9, 'test3', 'test', 5, '123', '', 1, '2025-04-19 14:40:00', '2025-03-13 15:41:22', '2025-03-14 11:23:17');
 
 -- --------------------------------------------------------
 
@@ -356,7 +430,11 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 ('m200409_110543_rbac_update_mssql_trigger', 1741681456),
 ('m250310_083328_create_user_table', 1741767997),
 ('m250310_133045_create_news_table', 1741790320),
-('m250313_101229_create_lfg_table', 1741864606);
+('m250313_101229_create_lfg_table', 1741864606),
+('m250317_134729_create_activity_type_table', 1742220377),
+('m250317_135802_create_activity_table', 1742220377),
+('m250317_140221_alter_lfg_table_add_activity_id', 1742220378),
+('m250317_140702_alter_lfg_table_add_activity_type_id', 1742220517);
 
 -- --------------------------------------------------------
 
@@ -383,9 +461,10 @@ CREATE TABLE `news` (
 INSERT INTO `news` (`id`, `title`, `content`, `author_id`, `author_username`, `status`, `created_at`, `updated_at`, `published_at`) VALUES
 (2, 'Test1', 'test', 1, 'Kirito', 1, '2025-03-12 14:49:15', '2025-03-12 14:52:00', '2025-03-12 14:52:00'),
 (3, 'Test2', 'Test', 2, 'Author', 1, '2025-03-12 16:51:13', '2025-03-12 16:54:05', '2025-03-12 16:54:05'),
-(4, 'nuovo evento preparatevi', 'gianni è arrivato', 9, 'gianni', 1, '2025-03-13 15:45:30', '2025-03-13 15:45:30', '2025-03-13 15:45:30'),
 (5, 'gianni', 'sda', 1, 'Kirito', 1, '2025-03-14 14:10:14', '2025-03-14 14:10:14', '2025-03-14 14:10:14'),
-(6, 'This Week In Destiny - 06/03/2025', 'asd', 1, 'Kirito', 1, '2025-03-14 14:29:41', '2025-03-14 14:29:41', '2025-03-14 14:29:41');
+(6, 'This Week In Destiny - 06/03/2025', 'asd', 1, 'Kirito', 1, '2025-03-14 14:29:41', '2025-03-14 14:29:41', '2025-03-14 14:29:41'),
+(7, 'This Week ', 'asd', 1, 'Kirito', 0, '2025-03-18 08:57:33', '2025-03-18 08:57:33', NULL),
+(8, 'asd', 'Beneath the ruins of the Last City lies the Black Armory\'s most precious vault, now under siege by Siviks and his crew, the Kell\'s Scourge ciao test test test test test test test test test test test test test test tes test tes te  st ', 1, 'Kirito', 0, '2025-03-18 15:05:43', '2025-03-18 15:37:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -414,15 +493,25 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `username`, `password_hash`, `auth_key`, `email`, `created_at`, `updated_at`, `bungieid`, `clan`, `status`, `icon_url`) VALUES
 (1, 'Kirito', '$2y$13$UTqh16eT3vwiHpcuUfDIi.bJPcDnUWslKWhUSGIU8WEtlUCFUjAG.', '2-Ud5-yyW7ko8SimlpYpzfFKba6mkG6K', 'gxe.kirito@gxerepublic.com', '2025-03-12 08:26:52', '2025-03-13 16:50:26', 'Kirito#1540', 'GXE Republic', 1, 'uploads/icons/67d30cd2ba706.jpg'),
 (2, 'Author', '$2y$13$Ni1.SzOGLOT333y5MHfHieIC5s9Uo.4JrfBUs/qsAQkyhQQMYECOW', 'RDpX0m4zo9mmclCSJ2lCrYORvp8U9mhf', 'gxe.author@gxerepublic.com', '2025-03-12 08:28:46', '2025-03-13 16:49:47', 'Test#1540', NULL, 1, 'uploads/default.jpg'),
-(5, 'Test', '$2y$13$pfbJJIegjgYU8ef9DRzsv.1aLAmZyOxUmgRSLWDeQm/3aO6sHtlaK', 'el-uWfdbKv-h4PwEQCG70w8J-Yh8zM0y', 'test@a.c', '2025-03-13 10:23:56', '2025-03-13 13:39:07', 'test', NULL, 1, 'uploads/default.jpg'),
-(6, 'Test2', '$2y$13$NmZxtosR2u8LiSGlWK3q7em1ox/uVRxGAPPY6pEAYH5oe1XLzl.ra', 'YVFrCeH29ycivNQgUTJ-IV0BSffbN3Yi', 'admin@admin.it', '2025-03-13 13:39:50', '2025-03-13 16:49:37', 'test2', NULL, 1, 'uploads/default.jpg'),
-(7, 'Test3', '$2y$13$bdrW2tRTPB0Yh2KEwT5rxOa/E1gSMnCpz7Bt.ccGlsGH4eOeBAeCa', 'b8bn5tcjIauXt1oMO-ZD3HolhdS0nxUu', 'test@b.c', '2025-03-13 13:41:02', '2025-03-13 16:49:42', 'test3', NULL, 1, 'uploads/default.jpg'),
-(8, 'Test4', '$2y$13$fTHbur/Vn26EMBhGf6xnIu92Jn30dndpO9.19vzl8gZnP4kqRJ2qq', 'a1mqR3EXyclf4uB64JqVfUEWIq2dKmAH', 'gxe.biagio@gmail.com', '2025-03-13 13:41:49', '2025-03-13 13:42:11', 'kljasd', NULL, 1, 'uploads/default.jpg'),
-(9, 'gianni', '$2y$13$AzceNq9teaYoyVO/XRtz3eTK96msC6ZwMp9fxXB39hIAifNExHtK2', 'imkWEAVIG8fAskfkaq7IhSoPqBnBk8wo', 'gianni@gianni.com', '2025-03-13 15:36:46', '2025-03-13 15:39:29', '123', NULL, 1, 'uploads/default.jpg');
+(10, 'User', '$2y$13$mL/2NXZu3y7iPwUJ7pkNEeeEyLhHJLnLfhFjVWaOKjCbbpewCqQUC', '9ICyN6YoEYc2yy_s0CiYVwY3IJloNnhr', 'gxe.user@gxerepublic.com', '2025-03-17 16:18:14', '2025-03-17 16:18:14', NULL, NULL, 1, 'uploads/default.jpg');
 
 --
 -- Indici per le tabelle scaricate
 --
+
+--
+-- Indici per le tabelle `activity`
+--
+ALTER TABLE `activity`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk-activity-activity_type_id` (`activity_type_id`);
+
+--
+-- Indici per le tabelle `activity_type`
+--
+ALTER TABLE `activity_type`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Indici per le tabelle `auth_assignment`
@@ -457,7 +546,9 @@ ALTER TABLE `auth_rule`
 --
 ALTER TABLE `lfg`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk-lfg-leader_id` (`leader_id`);
+  ADD KEY `fk-lfg-leader_id` (`leader_id`),
+  ADD KEY `fk-lfg-activity_id` (`activity_id`),
+  ADD KEY `fk-lfg-activity_type_id` (`activity_type_id`);
 
 --
 -- Indici per le tabelle `menu`
@@ -494,10 +585,22 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT per la tabella `activity`
+--
+ALTER TABLE `activity`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT per la tabella `activity_type`
+--
+ALTER TABLE `activity_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT per la tabella `lfg`
 --
 ALTER TABLE `lfg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT per la tabella `menu`
@@ -509,17 +612,23 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT per la tabella `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT per la tabella `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Limiti per le tabelle scaricate
 --
+
+--
+-- Limiti per la tabella `activity`
+--
+ALTER TABLE `activity`
+  ADD CONSTRAINT `fk-activity-activity_type_id` FOREIGN KEY (`activity_type_id`) REFERENCES `activity_type` (`id`) ON DELETE CASCADE;
 
 --
 -- Limiti per la tabella `auth_assignment`
@@ -544,6 +653,8 @@ ALTER TABLE `auth_item_child`
 -- Limiti per la tabella `lfg`
 --
 ALTER TABLE `lfg`
+  ADD CONSTRAINT `fk-lfg-activity_id` FOREIGN KEY (`activity_id`) REFERENCES `activity` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk-lfg-activity_type_id` FOREIGN KEY (`activity_type_id`) REFERENCES `activity_type` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `fk-lfg-leader_id` FOREIGN KEY (`leader_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 --
