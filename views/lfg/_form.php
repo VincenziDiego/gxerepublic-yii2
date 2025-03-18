@@ -4,12 +4,9 @@ use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use app\models\ActivityType;
 use yii\widgets\ActiveForm;
-use yii\web\JqueryAsset;
 
-// Registra jQuery esplicitamente (se non già incluso dal layout)
-JqueryAsset::register($this);
+// Registra jQuery manualmente (se necessario)
 ?>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <div class="lfg-form">
@@ -29,7 +26,7 @@ JqueryAsset::register($this);
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <!-- Campo max_players ora è un input testuale, l'utente può modificarlo -->
+    <!-- Campo max_players editabile -->
     <?= $form->field($model, 'max_players')->textInput() ?>
 
     <?= $form->field($model, 'start_time')->input('datetime-local', [
@@ -37,7 +34,9 @@ JqueryAsset::register($this);
     ]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Crea' : 'Aggiorna', ['class' => $model->isNewRecord ? 'btn btn-success btn-submit' : 'btn btn-primary btn-submit']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Crea' : 'Aggiorna', [
+            'class' => $model->isNewRecord ? 'btn btn-success btn-submit' : 'btn btn-primary btn-submit'
+        ]) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
@@ -45,9 +44,8 @@ JqueryAsset::register($this);
 
 <script>
     jQuery(document).ready(function () {
-        // Quando cambia la categoria, popola il dropdown delle attività
-        jQuery('#<?= Html::getInputId($model, 'activity_type_id') ?>').on('change', function () {
-            var categoryId = jQuery(this).val();
+        // Funzione per popolare il dropdown delle attività
+        function loadActivities(categoryId, selectedActivityId) {
             var activityDropdown = jQuery('#<?= Html::getInputId($model, 'activity_id') ?>');
             activityDropdown.empty().append(jQuery('<option>').text('Caricamento in corso...').attr('value', ''));
             if (categoryId) {
@@ -65,6 +63,10 @@ JqueryAsset::register($this);
                                 activityDropdown.append(jQuery('<option>').attr('value', key).text(value));
                             });
                         }
+                        // Se c'è un'attività già selezionata, impostala
+                        if (selectedActivityId) {
+                            activityDropdown.val(selectedActivityId);
+                        }
                     },
                     error: function () {
                         activityDropdown.empty().append(jQuery('<option>').text('Errore nel caricamento').attr('value', ''));
@@ -73,9 +75,22 @@ JqueryAsset::register($this);
             } else {
                 activityDropdown.empty().append(jQuery('<option>').text('Seleziona l\'attività').attr('value', ''));
             }
+        }
+
+        // Al caricamento della pagina, se siamo in update, carica il dropdown delle attività
+        var existingCategoryId = jQuery('#<?= Html::getInputId($model, 'activity_type_id') ?>').val();
+        var existingActivityId = '<?= $model->activity_id ?>'; // valore già salvato nel modello
+        if (existingCategoryId) {
+            loadActivities(existingCategoryId, existingActivityId);
+        }
+
+        // Quando cambia la categoria, ricarica il dropdown delle attività senza valore pre-selezionato
+        jQuery('#<?= Html::getInputId($model, 'activity_type_id') ?>').on('change', function () {
+            var categoryId = jQuery(this).val();
+            loadActivities(categoryId, null);
         });
 
-        // Quando viene selezionata un'attività, imposta automaticamente max_players
+        // Quando viene selezionata un'attività, imposta automaticamente max_players tramite AJAX
         jQuery('#<?= Html::getInputId($model, 'activity_id') ?>').on('change', function () {
             var activityId = jQuery(this).val();
             if (activityId) {

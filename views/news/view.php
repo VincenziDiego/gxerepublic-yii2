@@ -15,6 +15,7 @@ $this->registerCssFile('@web/css/news-view.css', [
     'depends' => [\app\assets\AppAsset::class],
     'position' => \yii\web\View::POS_HEAD,
 ]);
+$currentUser = Yii::$app->user->identity;
 ?>
 <div class="news-view modern-news-view">
     <div class="news-card">
@@ -29,14 +30,18 @@ $this->registerCssFile('@web/css/news-view.css', [
             <p><?= nl2br(Html::encode($model->content)) ?></p>
         </div>
         <div class="news-card-footer">
-            <?= Html::a('Aggiorna', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a('Cancella', ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger',
-                'data' => [
-                    'confirm' => 'Sei sicuro di voler cancellare questa News?',
-                    'method' => 'post',
-                ],
-            ]) ?>
+            <?php
+            if (Yii::$app->user->can('admin') || ($model->user && $model->user->id === $currentUser->id)) {
+                echo Html::a('Aggiorna', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
+                echo Html::a('Cancella', ['delete', 'id' => $model->id], [
+                    'class' => 'btn btn-danger',
+                    'data' => [
+                        'confirm' => 'Sei sicuro di voler cancellare questa News?',
+                        'method' => 'post',
+                    ],
+                ]);
+            }
+            ?>
         </div>
     </div>
 </div>

@@ -90,6 +90,12 @@ body {
   font-size: 1.4rem;
   margin-bottom: 0.75rem;
   color: var(--primary-color);
+  height: 3em; /* altezza fissa per circa 2 righe, regola se serve */
+  line-height: 1.5em; /* definisce l'altezza di una riga */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }
 .news-dashboard-card .card-text {
   font-size: 1rem;

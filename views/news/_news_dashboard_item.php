@@ -3,6 +3,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 date_default_timezone_set('Europe/Rome');
+$currentUser = Yii::$app->user->identity;
 ?>
 <div class="card news-dashboard-card shadow-sm mb-4">
     <div class="card-body">
@@ -34,22 +35,38 @@ date_default_timezone_set('Europe/Rome');
             <?= $model->status == 1 ? 'Pubblicato' : 'Bozza' ?>
         </span>
         <div class="news-actions">
-            <?= Html::a('<i class="fas fa-eye"></i>', ['view', 'id' => $model->id], [
-                'class' => 'btn btn-sm btn-outline-info',
-                'title' => 'Visualizza'
-            ]) ?>
-            <?= Html::a('<i class="fas fa-edit"></i>', ['update', 'id' => $model->id], [
-                'class' => 'btn btn-sm btn-outline-warning',
-                'title' => 'Modifica'
-            ]) ?>
-            <?= Html::a('<i class="fas fa-trash-alt"></i>', ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-sm btn-outline-danger',
-                'title' => 'Elimina',
-                'data' => [
-                    'confirm' => 'Sei sicuro di voler eliminare questa news?',
-                    'method' => 'post',
-                ],
-            ]) ?>
+            <?php
+            // Controllo dei permessi per mostrare i pulsanti Modifica ed Elimina
+            if ($currentUser) {
+                // Usa RBAC per verificare se l'utente ha il ruolo "admin"
+                // oppure se l'utente è l'autore della news
+                if (Yii::$app->user->can('admin') || ($model->user && $model->user->id === $currentUser->id)) {
+                    echo Html::a('<i class="fas fa-eye"></i>', ['view', 'id' => $model->id], [
+                        'class' => 'btn btn-sm btn-outline-info',
+                        'title' => 'Visualizza'
+                    ]);
+                    echo Html::a('<i class="fas fa-edit"></i>', ['update', 'id' => $model->id], [
+                        'class' => 'btn btn-sm btn-outline-warning',
+                        'title' => 'Modifica'
+                    ]);
+                    echo Html::a('<i class="fas fa-trash-alt"></i>', ['delete', 'id' => $model->id], [
+                        'class' => 'btn btn-sm btn-outline-danger',
+                        'title' => 'Elimina',
+                        'data' => [
+                            'confirm' => 'Sei sicuro di voler eliminare questa news?',
+                            'method' => 'post',
+                        ],
+                    ]);
+                }
+
+                if (!Yii::$app->user->can('admin') && !($model->user && $model->user->id === $currentUser->id)) {
+                    echo Html::a('<i class="fas fa-eye"></i>', ['view', 'id' => $model->id], [
+                        'class' => 'btn btn-sm btn-outline-info',
+                        'title' => 'Visualizza'
+                    ]);
+                }
+            }
+            ?>
         </div>
     </div>
 </div>
