@@ -1,7 +1,8 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\ActivityType;
 
 /** @var yii\web\View $this */
 /** @var app\models\ActivitySearch $model */
@@ -17,7 +18,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'activity_type_id') ?>
+    <!-- Usa dropDownList per category_name in modo che l'utente selezioni la categoria per nome -->
+    <?= $form->field($model, 'category_name')->textInput(['placeholder' => 'Search by Category']) ?>
 
     <?= $form->field($model, 'name') ?>
 

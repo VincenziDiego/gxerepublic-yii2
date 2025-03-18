@@ -1,0 +1,113 @@
+@import "variables.css";
+@import "site.css";
+
+/* Contenitore principale per la pagina index */
+.activity-type-index {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  color: #fff;
+  background-color: #121212; /* Sfondo scuro */
+}
+
+/* Titolo della pagina con neon glow */
+.activity-type-index h1 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  text-shadow: 0 0 6px var(--primary-color), 0 0 12px var(--primary-color),
+    0 0 18px var(--primary-color);
+  transition: text-shadow 0.5s ease-in-out;
+}
+.activity-type-index h1:hover {
+  text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color),
+    0 0 30px var(--primary-color);
+}
+
+/* Pulsante "Create Activity Type" con glow */
+.activity-type-index .btn-success {
+  background-color: var(--primary-color);
+  color: #000;
+  border: none;
+  border-radius: 30px;
+  padding: 0.85rem 1.8rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 0 10px var(--primary-color);
+}
+.activity-type-index .btn-success:hover {
+  background-color: #2ecc71;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #2ecc71;
+}
+
+/* Contenitore per la tabella */
+.table-container {
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Tabella */
+.table {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  border-collapse: collapse;
+  background-color: #1f1f1f;
+  color: #fff;
+}
+.table th,
+.table td {
+  padding: 0.75rem;
+  border: 1px solid #333;
+  text-align: left;
+  color: #fff;
+}
+.table th {
+  background-color: #2a2a2a;
+  color: var(--primary-color);
+}
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: #242424;
+  color: #fff;
+}
+
+/* Hover sulle righe */
+.table tbody tr:hover td {
+  background-color: #2c2c2c !important;
+}
+
+/* Campi di ricerca (se li usi con filterModel) */
+.form-control {
+  background-color: #27282c;
+  border: 1px solid #444;
+  color: #fff;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.form-control:focus {
+  background-color: #2c2c2c;
+  border-color: var(--primary-color);
+  box-shadow: none;
+  outline: none;
+}
+
+/* Pulsanti di azione */
+.action-column a {
+  margin-right: 0.5rem;
+  color: var(--primary-color);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.action-column a:hover {
+  transform: scale(1.1);
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .activity-type-index h1 {
+    font-size: 2.2rem;
+  }
+}

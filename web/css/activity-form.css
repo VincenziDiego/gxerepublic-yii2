@@ -1,41 +1,51 @@
 @import "variables.css";
 @import "site.css";
 
-/* Contenitore principale per il form */
+/* -------------------------------
+   PAGINA FORM - Create/Update Activity
+------------------------------- */
 .activity-form-page {
-  max-width: 600px;
+  max-width: 800px;
   margin: 2rem auto;
   padding: 0 1rem;
   color: #fff;
+  background-color: var(--bg-body, #121212);
 }
 
-/* Titolo della pagina form */
-.activity-form-page .page-title {
+.page-title {
   font-size: 2.2rem;
   text-align: center;
   margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  text-shadow: 0 0 8px rgba(66, 153, 225, 0.8);
+  transition: text-shadow 0.5s ease-in-out;
 }
 
-/* Contenitore per il form */
+.page-title:hover {
+  text-shadow: 0 0 12px var(--primary-color);
+}
+
 .activity-form-container {
   display: flex;
   justify-content: center;
 }
 
 .activity-form-card {
-  background: rgba(31, 31, 31, 0.9);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(8px);
-  border: 1px solid #333;
-  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
   padding: 2rem;
   width: 100%;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  max-width: 600px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Gruppi del form */
 .activity-form-card .form-group {
   margin-bottom: 1.5rem;
 }
+
 .activity-form-card .form-group label {
   display: block;
   margin-bottom: 0.5rem;
@@ -43,59 +53,54 @@
   font-weight: 500;
 }
 
-/* Campi del form */
+/* Campi del form: sfondo grigio scuro con testo bianco */
 .activity-form-card .form-control {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: #2c2c2c;
+  border: 1px solid #444;
   color: #fff;
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1rem;
   width: 100%;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
+
 .activity-form-card .form-control:focus {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: #333;
   border-color: var(--primary-color);
   box-shadow: none;
   outline: none;
 }
 
-/* Stile specifico per i dropdown per far apparire le opzioni con sfondo nero */
-.activity-form-card select.form-control option {
-  background-color: #000;
-  color: #fff;
-}
-
-/* Messaggi di errore */
-.activity-form-card .help-block {
-  color: #ff6b6b;
-  margin-top: 0.25rem;
-  font-size: 0.9rem;
-}
-
-/* Bottone di submit */
-.activity-form-card .btn-success,
-.activity-form-card .btn-primary {
+/* Pulsante di submit con effetto glow */
+.activity-form-card .btn-submit {
   background-color: var(--primary-color);
+  color: #000;
   border: none;
   border-radius: 5px;
   padding: 0.75rem 1.5rem;
   font-weight: 600;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  color: #000;
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 0 8px var(--primary-color);
 }
-.activity-form-card .btn-success:hover,
-.activity-form-card .btn-primary:hover {
-  background-color: #fff;
-  color: #000;
+
+.activity-form-card .btn-submit:hover {
+  background-color: #2ecc71;
+  transform: scale(1.05);
+  box-shadow: 0 0 12px #2ecc71;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .activity-form-page .page-title {
+  .page-title {
     font-size: 1.8rem;
   }
   .activity-form-card {
     padding: 1.5rem;
   }
+}
+
+.activity-update {
+  margin-top: 35px; /* Regola questo valore in base all'altezza della tua navbar */
 }

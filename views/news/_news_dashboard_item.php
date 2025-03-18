@@ -8,9 +8,6 @@ $currentUser = Yii::$app->user->identity;
 <div class="card news-dashboard-card shadow-sm mb-4">
     <div class="card-body">
         <h5 class="card-title"><?= Html::encode($model->title) ?></h5>
-        <p class="card-text">
-            <?= nl2br(Html::encode(substr($model->content, 0, 150))) ?>...
-        </p>
         <div class="news-meta">
             <span class="news-author">
                 <?php
@@ -29,6 +26,9 @@ $currentUser = Yii::$app->user->identity;
                 <?= Yii::$app->formatter->asDatetime(strtotime($model->created_at), 'php:d/m/Y H:i') ?>
             </span>
         </div>
+        <p class="card-text">
+            <?= nl2br(Html::encode(substr($model->content, 0, 150))) ?>...
+        </p>
     </div>
     <div class="card-footer d-flex justify-content-between align-items-center">
         <span class="news-status badge <?= $model->status == 1 ? 'badge-success' : 'badge-secondary' ?>">
