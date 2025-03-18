@@ -2,7 +2,6 @@
 use yii\helpers\Html;
 
 $this->title = 'Aggiorna LFG: ' . $model->activity_type;
-$this->params['breadcrumbs'][] = $this->title;
 $this->registerCssFile('@web/css/lfg-update.css', [
     'depends' => [\app\assets\AppAsset::class],
     'position' => \yii\web\View::POS_HEAD,

@@ -3,7 +3,6 @@ use yii\widgets\ListView;
 use yii\helpers\Html;
 
 $this->title = 'News';
-$this->params['breadcrumbs'][] = $this->title;
 
 $this->registerCssFile('@web/css/news-public.css', [
     'depends' => [\app\assets\AppAsset::class],

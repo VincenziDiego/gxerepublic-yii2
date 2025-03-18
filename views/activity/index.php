@@ -11,7 +11,7 @@ use yii\grid\GridView;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Activities';
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="activity-index">
 
@@ -37,8 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Activity $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                        return Url::toRoute([$action, 'id' => $model->id]);
+                    }
             ],
         ],
     ]); ?>

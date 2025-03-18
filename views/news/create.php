@@ -5,8 +5,6 @@ use yii\helpers\Html;
 /** @var app\models\News $model */
 
 $this->title = 'Create News';
-$this->params['breadcrumbs'][] = ['label' => 'News', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 
 // Registra il CSS dedicato
 $this->registerCssFile('@web/css/news-create.css', [

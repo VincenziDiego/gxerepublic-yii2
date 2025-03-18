@@ -7,7 +7,6 @@ use yii\helpers\Html;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'News Dashboard';
-$this->params['breadcrumbs'][] = $this->title;
 
 $this->registerCssFile('@web/css/news-index.css', [
     'depends' => [\app\assets\AppAsset::class],

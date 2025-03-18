@@ -6,8 +6,6 @@ use yii\helpers\Html;
 /** @var app\models\ActivityType $model */
 
 $this->title = 'Create Activity Type';
-$this->params['breadcrumbs'][] = ['label' => 'Activity Types', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="activity-type-create">
 

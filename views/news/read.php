@@ -4,8 +4,6 @@ use yii\helpers\Html;
 date_default_timezone_set('Europe/Rome');
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'News Pubblicate', 'url' => ['public']];
-$this->params['breadcrumbs'][] = $this->title;
 
 $this->registerCssFile('@web/css/news-read.css', [
     'depends' => [\app\assets\AppAsset::class],

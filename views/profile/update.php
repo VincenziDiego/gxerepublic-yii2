@@ -3,7 +3,6 @@ use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = 'Aggiorna Profilo';
-$this->params['breadcrumbs'][] = $this->title;
 $this->registerCssFile('@web/css/profile-update.css', [
     'depends' => [\app\assets\AppAsset::class],
     'position' => \yii\web\View::POS_HEAD,

@@ -6,9 +6,6 @@ use yii\helpers\Html;
 /** @var app\models\ActivityType $model */
 
 $this->title = 'Update Activity Type: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Activity Types', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="activity-type-update">
 

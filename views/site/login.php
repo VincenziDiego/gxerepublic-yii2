@@ -7,7 +7,6 @@ $this->registerCssFile('@web/css/login.css', [
     'depends' => [\app\assets\AppAsset::class],
     'position' => \yii\web\View::POS_HEAD,
 ]);
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <section class="login-page">
     <div class="login-card">

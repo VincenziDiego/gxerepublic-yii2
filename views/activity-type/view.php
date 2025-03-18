@@ -7,8 +7,6 @@ use yii\widgets\DetailView;
 /** @var app\models\ActivityType $model */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Activity Types', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="activity-type-view">

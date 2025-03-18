@@ -6,8 +6,6 @@ use yii\helpers\Html;
 /** @var app\models\News $model */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'News', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 
 // Registra il file CSS dedicato (assicurati che il percorso sia corretto)
