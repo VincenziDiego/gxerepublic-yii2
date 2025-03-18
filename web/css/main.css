@@ -1,82 +1,132 @@
 /* -----------------------------
-   IMPORTAZIONE VARIABILI E FONT
+    IMPORTAZIONE VARIABILI E FONT
 ----------------------------- */
 @import "variables.css";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 
 /* -----------------------------
-   SEZIONE FOOTER FUTURISTICO
+    MAIN BODY LAYOUT FIXES
 ----------------------------- */
-/* Footer futuristico con gradient e transizione al passaggio del mouse */
-#footer {
-  background: linear-gradient(135deg, #2b2b2b, #3f3f3f);
-  color: #ddd;
+body.modern-body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 76px; /* Adjust according to your navbar height */
+}
+
+#main-content {
+  flex: 1 0 auto;
   padding: 1.5rem 0;
-  font-size: 0.9rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  min-height: calc(
+    100vh - 76px - 200px
+  ); /* viewport - navbar - approx footer */
+}
+
+/* Style for alerts */
+.alert {
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Add padding to container */
+.container {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* -----------------------------
+    NAVBAR DISPLAY FIXES
+----------------------------- */
+.navbar-modern {
+  background: linear-gradient(135deg, #5451d2, #16163f);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  padding: 0.75rem 1.5rem;
   transition: background 0.3s ease;
-}
-
-#footer .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-#footer .row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1030;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
+}
+
+.navbar-collapse {
+  display: flex !important; /* Force display */
+  flex-basis: 100%;
+  flex-grow: 1;
   align-items: center;
 }
 
-#footer a {
-  color: var(--primary-color);
-  text-decoration: none;
-  transition: color 0.3s ease;
+.navbar-nav {
+  display: flex !important;
+  flex-direction: row;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
 }
 
-#footer a:hover {
-  color: #fff;
+/* Make sure nav items are visible */
+.navbar-modern .navbar-nav {
+  opacity: 1;
+  visibility: visible;
 }
 
-#footer::before {
-  content: "";
+/* Ensure the right items are aligned properly */
+.navbar-nav.ms-auto {
+  margin-left: auto !important;
+}
+
+/* Ensure the left items are aligned properly */
+.navbar-nav.me-auto {
+  margin-right: auto !important;
+}
+
+/* Make sure dropdown menus are visible when opened */
+.dropdown-menu.show {
   display: block;
-  width: 80%;
-  height: 2px;
-  background: linear-gradient(
-    to right,
-    var(--primary-color),
-    var(--secondary-color)
-  );
-  margin: 0 auto 1rem;
-  border-radius: 1px;
+  opacity: 1;
+  visibility: visible;
 }
 
-@media (max-width: 767.98px) {
-  #footer .row {
-    flex-direction: column;
-    text-align: center;
+/* Force visibility on mobile */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    display: block !important;
   }
-  #footer .col-md-6 {
-    margin-bottom: 0.5rem;
+
+  .navbar-nav {
+    display: block !important;
+    text-align: left;
+    padding: 0.5rem 0;
+  }
+
+  .navbar-modern .navbar-toggler {
+    display: block;
+  }
+
+  .navbar-collapse.collapse.show {
+    display: block !important;
+  }
+
+  /* Only hide when collapsed */
+  .navbar-collapse:not(.show) {
+    display: none !important;
   }
 }
 
 /* -----------------------------
-   SEZIONE NAVBAR MODERNA
+    SEZIONE NAVBAR MODERNA MIGLIORATA
 ----------------------------- */
-body.modern-body {
-  font-family: "Roboto", sans-serif;
-}
-
-/* Navbar moderna con gradient statico */
 .navbar-modern {
-  background: linear-gradient(135deg, #5451d2, #5e56bc);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #5451d2, #16163f);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
   padding: 0.75rem 1.5rem;
   transition: background 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1030; /* Ensure navbar stays on top */
 }
 
 .navbar-modern .navbar-brand {
@@ -85,16 +135,19 @@ body.modern-body {
   color: #fff !important;
   text-transform: uppercase;
   letter-spacing: 1px;
+  padding: 0;
+  margin-right: 1rem;
 }
 
 .navbar-modern .navbar-brand img {
   height: 45px;
   width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
 }
 
-.navbar-modern .navbar-brand:hover,
-.navbar-modern .navbar-brand:focus {
-  color: var(--primary-color) !important;
+.navbar-modern .navbar-brand:hover img {
+  transform: scale(1.05);
 }
 
 .navbar-modern .navbar-nav .nav-link {
@@ -102,20 +155,62 @@ body.modern-body {
   font-weight: 500;
   color: #eee !important;
   padding: 0.5rem 1rem;
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.navbar-modern .navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 43%;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateX(-50%);
+}
+
+/* Stile specifico per i link principali (non dropdown) */
+.navbar-modern .navbar-nav .nav-link-main::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background: var(--primary-color);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateX(-50%);
+}
+
+.navbar-modern .navbar-nav .nav-link:hover::after,
+.navbar-modern .navbar-nav .nav-link:focus::after,
+.navbar-modern .navbar-nav .nav-link-main:hover::after,
+.navbar-modern .navbar-nav .nav-link-main:focus::after {
+  width: 70%;
+  opacity: 1;
 }
 
 .navbar-modern .navbar-nav .nav-link:hover,
-.navbar-modern .navbar-nav .nav-link:focus {
-  color: var(--primary-color) !important;
+.navbar-modern .navbar-nav .nav-link:focus,
+.navbar-modern .navbar-nav .nav-link-main:hover,
+.navbar-modern .navbar-nav .nav-link-main:focus {
+  color: #fff !important;
   transform: translateY(-2px);
 }
 
 .navbar-modern .navbar-nav .dropdown-menu {
-  background-color: rgba(42, 42, 42, 0.95);
-  border: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  background-color: rgba(35, 35, 45, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   margin-top: 0.5rem;
+  padding: 0.5rem;
 }
 
 .navbar-modern .navbar-nav .dropdown-item {
@@ -123,19 +218,26 @@ body.modern-body {
   font-weight: 500;
   color: #ddd;
   padding: 0.5rem 1rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  margin-bottom: 2px;
 }
 
 .navbar-modern .navbar-nav .dropdown-item:hover,
 .navbar-modern .navbar-nav .dropdown-item:focus {
-  background-color: #444;
+  background-color: rgba(84, 81, 210, 0.2);
   color: var(--primary-color);
+  transform: translateX(3px);
 }
 
 .navbar-modern .navbar-brand-logo {
   max-height: 60px;
+  max-width: 200px;
+  height: auto;
+  width: auto;
   margin-right: 10px;
   vertical-align: middle;
+  object-fit: contain;
 }
 
 .navbar-modern .dropdown-toggle::after {
@@ -149,19 +251,20 @@ body.modern-body {
 .navbar-modern .navbar-toggler {
   border: none;
   outline: none;
+  padding: 0.4rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.navbar-modern .navbar-toggler:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .navbar-modern .navbar-toggler-icon {
   filter: invert(1) brightness(1000%);
 }
 
-.navbar-nav .user-icon-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 0 !important;
-}
-
+/* User icon styling improvements */
 .user-icon-wrapper {
   display: flex;
   align-items: center;
@@ -171,12 +274,19 @@ body.modern-body {
 }
 
 .user-icon {
-  height: 24px;
-  width: 24px;
+  height: 28px;
+  width: 28px;
   border-radius: 50%;
   object-fit: cover;
   vertical-align: middle;
   margin: 0;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.user-icon-wrapper:hover .user-icon {
+  border-color: var(--primary-color);
+  transform: scale(1.05);
 }
 
 .navbar-nav > li > a {
@@ -190,4 +300,455 @@ body.modern-body {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   line-height: 1;
+}
+
+/* Login e Signup button styling */
+.nav-btn {
+  padding: 0.45rem 1.2rem !important;
+  margin-left: 0.5rem;
+  border-radius: 50px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.nav-btn-signup {
+  background-color: var(--primary-color);
+  color: white !important;
+}
+
+.nav-btn-login {
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.nav-btn-signup:hover {
+  background-color: #4340b2;
+  transform: translateY(-2px);
+}
+
+.nav-btn-login:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Fixed navbar positioning */
+.fixed-top {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+/* -----------------------------
+    SEZIONE FOOTER FUTURISTICO MIGLIORATO
+----------------------------- */
+#footer {
+  background: linear-gradient(135deg, #1a1a2e, #242440);
+  color: #ddd;
+  padding: 2rem 0 1rem;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  width: 100%;
+  z-index: 10;
+  margin-top: auto; /* Ensures footer stays at bottom */
+}
+
+#footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start; /* Align content to the left */
+}
+
+.footer-logo {
+  max-height: 60px;
+  max-width: 200px; /* Limit width to prevent stretching */
+  width: auto;
+  height: auto; /* Maintain aspect ratio */
+  filter: brightness(0.9);
+  object-fit: contain; /* Ensures the logo maintains aspect ratio */
+}
+
+.footer-info p {
+  color: #aaa;
+  line-height: 1.6;
+}
+
+.footer-links h5 {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-links h5::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 2px;
+  background: var(--primary-color);
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+  color: #aaa;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: #fff;
+  transform: translateX(5px);
+}
+
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 1rem 0;
+}
+
+#footer .row {
+  margin-top: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .footer-info {
+    align-items: center;
+  }
+}
+
+/* -----------------------------
+    PAGINA DI ERRORE 404
+----------------------------- */
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #121212;
+  color: #eee;
+  font-family: "Roboto", sans-serif;
+}
+
+.error-code {
+  font-size: 12rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  color: var(--primary-color);
+}
+
+.error-message {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+.error-description {
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  padding: 0 1rem;
+  line-height: 1.7;
+  color: #aaa;
+}
+
+.error-link {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.error-link:hover {
+  background-color: #4340b2;
+  transform: translateY(-2px);
+}
+
+/* Responsive adjustments for error page */
+@media (max-width: 767.98px) {
+  .error-code {
+    font-size: 10rem;
+  }
+
+  .error-message {
+    font-size: 1.5rem;
+  }
+
+  .error-description {
+    font-size: 1rem;
+  }
+}
+
+/* -----------------------------
+    PAGINA DI LOGIN
+----------------------------- */
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #121212;
+  font-family: "Roboto", sans-serif;
+  padding: 20px;
+}
+
+.login-form {
+  background-color: #1f1f30;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 450px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.login-form:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+}
+
+.login-form h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #eee;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.form-group {
+  margin-bottom: 1.8rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #aaa;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.form-group label.focus-label {
+  color: var(--primary-color);
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 2px solid #303045;
+  background-color: transparent;
+  color: #eee;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(84, 81, 210, 0.3);
+}
+
+.form-control::placeholder {
+  color: #666;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.form-control:focus::placeholder {
+  opacity: 0;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 0.8rem;
+}
+
+.custom-checkbox {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 2px solid #555;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+}
+
+.custom-checkbox input:checked ~ .checkmark::after {
+  display: block;
+}
+
+.checkbox-text {
+  font-size: 0.95rem;
+  color: #aaa;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+.custom-checkbox input:focus ~ .checkbox-text {
+  color: var(--primary-color);
+}
+
+.login-button {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--primary-color);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.login-button:hover {
+  background-color: #4340b2;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
+}
+
+.login-button:disabled {
+  background-color: #5451d2;
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.login-options {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #aaa;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-options a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.login-options a:hover {
+  color: #6a67ce;
+}
+
+/* Responsive adjustments for login page */
+@media (max-width: 575.98px) {
+  .login-form {
+    padding: 2rem;
+  }
+
+  .login-form h2 {
+    font-size: 1.75rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-control {
+    font-size: 1rem;
+  }
+
+  .login-options {
+    font-size: 0.85rem;
+  }
 }

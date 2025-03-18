@@ -41,21 +41,22 @@ $this->registerCssFile('@web/css/main.css', [
                 'class' => 'navbar-brand-logo'
             ]),
             'brandUrl' => Yii::$app->homeUrl,
-            'options' => ['class' => 'navbar navbar-expand-lg navbar-modern fixed-top']
+            'options' => ['class' => 'navbar navbar-expand-lg navbar-modern fixed-top'],
+            'innerContainerOptions' => ['class' => 'container'],
         ]);
 
         // Menu items lato sinistro
         $leftItems = [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Home', 'url' => ['/site/index'], 'linkOptions' => ['class' => 'nav-link-main']], // Aggiunta classe
+            ['label' => 'About', 'url' => ['/site/about'], 'linkOptions' => ['class' => 'nav-link-main']], // Aggiunta classe
+            ['label' => 'Contact', 'url' => ['/site/contact'], 'linkOptions' => ['class' => 'nav-link-main']], // Aggiunta classe
         ];
 
         // Menu items lato destro
         $rightItems = [];
 
         if (!Yii::$app->user->isGuest && Yii::$app->user->can('user') && !Yii::$app->user->can('author') && !Yii::$app->user->can('admin')) {
-            $rightItems[] = ['label' => 'News', 'url' => ['/news/public']];
+            $rightItems[] = ['label' => 'News', 'url' => ['/news/public'], 'linkOptions' => ['class' => 'nav-link-main']]; // Aggiunta classe
         }
 
         if (!Yii::$app->user->isGuest && Yii::$app->user->can('author')) {
@@ -69,7 +70,7 @@ $this->registerCssFile('@web/css/main.css', [
         }
 
         if (!Yii::$app->user->isGuest && Yii::$app->user->can('user') && !Yii::$app->user->can('admin') && !Yii::$app->user->can('admin')) {
-            $rightItems[] = ['label' => 'LFG', 'url' => ['/lfg']];
+            $rightItems[] = ['label' => 'LFG', 'url' => ['/lfg'], 'linkOptions' => ['class' => 'nav-link-main']]; // Aggiunta classe
         }
 
         if (!Yii::$app->user->isGuest && Yii::$app->user->can('admin')) {
@@ -99,8 +100,8 @@ $this->registerCssFile('@web/css/main.css', [
         }
 
         if (Yii::$app->user->isGuest) {
-            $rightItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-            $rightItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+            $rightItems[] = ['label' => 'Signup', 'url' => ['/site/signup'], 'linkOptions' => ['class' => 'nav-btn nav-btn-signup']];
+            $rightItems[] = ['label' => 'Login', 'url' => ['/site/login'], 'linkOptions' => ['class' => 'nav-btn nav-btn-login']];
         } else {
             $userIdentity = Yii::$app->user->identity;
             $profileImage = !empty($userIdentity->icon_url)
@@ -108,13 +109,13 @@ $this->registerCssFile('@web/css/main.css', [
                 : Yii::getAlias('@web') . '/uploads/default.jpg';
             $username = $userIdentity->username;
             $rightItems[] = [
-                'label' => '<span class="user-icon-wrapper">'
+                'label' => '<div class="user-icon-wrapper">'
                     . Html::encode($username)
                     . Html::img($profileImage, [
                         'class' => 'user-icon',
                         'alt' => $username,
                     ])
-                    . '</span>',
+                    . '</div>',
                 'encode' => false,
                 'items' => [
                     ['label' => 'Profilo', 'url' => ['/profile/update']],
@@ -130,16 +131,14 @@ $this->registerCssFile('@web/css/main.css', [
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav ms-auto'],
             'items' => $rightItems,
+            'encodeLabels' => false,
         ]);
 
         NavBar::end();
         ?>
     </header>
 
-    <!-- Placeholder per compensare l'altezza della navbar fissa -->
-    <div class="header-placeholder"></div>
-
-    <main id="main" class="flex-shrink-0" role="main">
+    <main id="main-content" class="flex-shrink-0">
         <div class="container">
             <?= Alert::widget() ?>
             <?= $content ?>
@@ -148,6 +147,20 @@ $this->registerCssFile('@web/css/main.css', [
 
     <footer id="footer" class="mt-auto py-3">
         <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <img src="<?= Yii::getAlias('@web/logo.png') ?>" alt="<?= Yii::$app->name ?>" class="footer-logo">
+                    <p>Comunità di sviluppatori e appassionati di gaming</p>
+                </div>
+                <div class="footer-links">
+                    <h5>Link utili</h5>
+                    <ul>
+                        <li><a href="<?= Yii::$app->urlManager->createUrl(['site/about']) ?>">Chi siamo</a></li>
+                        <li><a href="<?= Yii::$app->urlManager->createUrl(['site/contact']) ?>">Contattaci</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
             <div class="row text-muted">
                 <div class="col-md-6 text-center text-md-start">
                     &copy; GXE Devs <?= date('Y') ?> // Sito ancora in corso di sviluppo
