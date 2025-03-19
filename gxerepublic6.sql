@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mar 18, 2025 alle 18:25
+-- Creato il: Mar 19, 2025 alle 18:22
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `gxerepublic5`
+-- Database: `gxerepublic6`
 --
 
 -- --------------------------------------------------------
@@ -464,7 +464,9 @@ INSERT INTO `news` (`id`, `title`, `content`, `author_id`, `author_username`, `s
 (5, 'gianni', 'sda', 1, 'Kirito', 1, '2025-03-14 14:10:14', '2025-03-14 14:10:14', '2025-03-14 14:10:14'),
 (6, 'This Week In Destiny - 06/03/2025', 'asd', 1, 'Kirito', 1, '2025-03-14 14:29:41', '2025-03-14 14:29:41', '2025-03-14 14:29:41'),
 (7, 'This Week ', 'asd', 1, 'Kirito', 0, '2025-03-18 08:57:33', '2025-03-18 08:57:33', NULL),
-(8, 'asd', 'Beneath the ruins of the Last City lies the Black Armory\'s most precious vault, now under siege by Siviks and his crew, the Kell\'s Scourge ciao test test test test test test test test test test test test test test tes test tes te  st ', 1, 'Kirito', 0, '2025-03-18 15:05:43', '2025-03-18 15:37:16', NULL);
+(8, 'asd', 'Beneath the ruins of the Last City lies the Black Armory\'s most precious vault, now under siege by Siviks and his crew, the Kell\'s Scourge ciao test test test test test test test test test test test test test test tes test tes te  st ', 1, 'Kirito', 0, '2025-03-18 15:05:43', '2025-03-18 15:37:16', NULL),
+(9, 'test cache 1', 'asd', 1, 'Kirito', 1, '2025-03-19 09:01:25', '2025-03-19 09:01:25', '2025-03-19 09:01:25'),
+(10, 'test cache 2', 'amasadasdasdasdasd', 1, 'Kirito', 1, '2025-03-19 09:53:42', '2025-03-19 15:09:09', '2025-03-19 09:54:01');
 
 -- --------------------------------------------------------
 
@@ -600,7 +602,7 @@ ALTER TABLE `activity_type`
 -- AUTO_INCREMENT per la tabella `lfg`
 --
 ALTER TABLE `lfg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT per la tabella `menu`
@@ -612,7 +614,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT per la tabella `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT per la tabella `user`
