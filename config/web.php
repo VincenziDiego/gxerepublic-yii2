@@ -5,7 +5,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
-    'name' => 'GXE Republic',
+    'name' => 'GXERepublic',
     'timeZone' => 'Europe/Rome',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],

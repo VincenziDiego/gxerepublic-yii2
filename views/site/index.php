@@ -40,9 +40,9 @@ $dependency = [
         </header>
 
         <!-- Contenuto Principale -->
-        <main class="body-content container main-content">
+        <div class="body-content container main-content">
             <!-- Sezione Info (Chi siamo, Cosa Facciamo, Unisciti a Noi) -->
-            <section class="modern-info row">
+            <div class="modern-info row">
                 <!-- Chi Siamo -->
                 <article class="col-md-4 d-flex">
                     <div class="info-box scroll-reveal">
@@ -101,7 +101,7 @@ $dependency = [
                         </div>
                     </div>
                 </article>
-            </section>
+            </div>
 
             <!-- Sezione Ultime Notizie -->
             <section class="latest-news row mt-5 scroll-reveal">
@@ -154,7 +154,7 @@ $dependency = [
                     </div>
                 </div>
             </section>
-        </main>
+        </div>
     </div>
     <?php $this->endCache(); ?>
 <?php endif; ?>

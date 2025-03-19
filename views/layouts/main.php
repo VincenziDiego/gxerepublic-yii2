@@ -47,67 +47,67 @@ $this->registerCssFile('@web/css/main.css', [
 
         // Menu items lato sinistro
         $leftItems = [
-            ['label' => 'Home', 'url' => ['/site/index'], 'linkOptions' => ['class' => 'nav-link-main']], // Aggiunta classe
-            ['label' => 'About', 'url' => ['/site/about'], 'linkOptions' => ['class' => 'nav-link-main']], // Aggiunta classe
-            ['label' => 'Contact', 'url' => ['/site/contact'], 'linkOptions' => ['class' => 'nav-link-main']], // Aggiunta classe
+            ['label' => 'Home', 'url' => ['/site/index'], 'linkOptions' => ['class' => 'nav-link-main']],
+            ['label' => 'About', 'url' => ['/site/about'], 'linkOptions' => ['class' => 'nav-link-main']],
+            ['label' => 'Contact', 'url' => ['/site/contact'], 'linkOptions' => ['class' => 'nav-link-main']],
         ];
 
         // Menu items lato destro
         $rightItems = [];
 
-        // $leftItems rimane invariato con Home, About, Contact...
-        
-        $rightItems = [];
+        if (!Yii::$app->user->isGuest && Yii::$app->user->can('user') && !Yii::$app->user->can('author') && !Yii::$app->user->can('admin')) {
+            $rightItems[] = ['label' => 'News', 'url' => ['/news/public'], 'linkOptions' => ['class' => 'nav-link-main']];
+        }
 
-        // Se l'utente è guest:
+        if (!Yii::$app->user->isGuest && Yii::$app->user->can('author')) {
+            $rightItems[] = [
+                'label' => 'News',
+                'items' => [
+                    ['label' => 'Pubblicate', 'url' => ['/news/public']],
+                    ['label' => 'Dashboard', 'url' => ['/news']],
+                ]
+            ];
+        }
+
+        if (!Yii::$app->user->isGuest && Yii::$app->user->can('user') && !Yii::$app->user->can('admin')) {
+            $rightItems[] = ['label' => 'LFG', 'url' => ['/lfg'], 'linkOptions' => ['class' => 'nav-link-main']];
+        }
+
+        if (!Yii::$app->user->isGuest && Yii::$app->user->can('admin')) {
+            $rightItems[] = [
+                'label' => 'LFG',
+                'items' => [
+                    ['label' => 'Lista LFG', 'url' => ['/lfg']],
+                    ['label' => 'Dashboard attività', 'url' => ['/activity']],
+                    ['label' => 'Dashboard tipologie attività', 'url' => ['/activity-type']],
+                ]
+            ];
+        }
+
+        if (!Yii::$app->user->isGuest && Yii::$app->user->can('admin')) {
+            $rightItems[] = [
+                'label' => 'Admin',
+                'items' => [
+                    ['label' => 'Utenti', 'url' => ['/admin/user']],
+                    ['label' => 'Ruoli', 'url' => ['/admin/role']],
+                    ['label' => 'Permessi', 'url' => ['/admin/permission']],
+                    ['label' => 'Route', 'url' => ['/admin/route']],
+                    ['label' => 'Assegnazioni', 'url' => ['/admin/assignment']],
+                    ['label' => 'Menu', 'url' => ['/admin/menu']],
+                    ['label' => 'Gii', 'url' => ['/gii']],
+                ]
+            ];
+        }
+
         if (Yii::$app->user->isGuest) {
             $rightItems[] = ['label' => 'Signup', 'url' => ['/site/signup'], 'linkOptions' => ['class' => 'nav-btn nav-btn-signup']];
             $rightItems[] = ['label' => 'Login', 'url' => ['/site/login'], 'linkOptions' => ['class' => 'nav-btn nav-btn-login']];
         } else {
-            // Se è user “puro” (non admin, non author)
-            if (Yii::$app->user->can('user') && !Yii::$app->user->can('admin') && !Yii::$app->user->can('author')) {
-                $rightItems[] = ['label' => 'News', 'url' => ['/news/public'], 'linkOptions' => ['class' => 'nav-link-main']];
-                $rightItems[] = ['label' => 'LFG', 'url' => ['/lfg'], 'linkOptions' => ['class' => 'nav-link-main']];
-            }
-
-            // Se è author
-            if (Yii::$app->user->can('author')) {
-                $rightItems[] = [
-                    'label' => 'News',
-                    'items' => [
-                        ['label' => 'Pubblicate', 'url' => ['/news/public']],
-                        ['label' => 'Dashboard', 'url' => ['/news']],
-                    ],
-                ];
-            }
-
-            // Se è admin
-            if (Yii::$app->user->can('admin')) {
-                $rightItems[] = [
-                    'label' => 'LFG',
-                    'items' => [
-                        ['label' => 'Lista LFG', 'url' => ['/lfg']],
-                        ['label' => 'Dashboard attività', 'url' => ['/activity']],
-                        ['label' => 'Dashboard tipologie attività', 'url' => ['/activity-type']],
-                    ],
-                ];
-                $rightItems[] = [
-                    'label' => 'Admin',
-                    'items' => [
-                        ['label' => 'Utenti', 'url' => ['/admin/user']],
-                        ['label' => 'Ruoli', 'url' => ['/admin/role']],
-                        // ... eccetera ...
-                    ],
-                ];
-            }
-
-            // E infine il menu col profilo e logout
             $userIdentity = Yii::$app->user->identity;
             $profileImage = !empty($userIdentity->icon_url)
                 ? Yii::getAlias('@web') . '/' . $userIdentity->icon_url
                 : Yii::getAlias('@web') . '/uploads/default.jpg';
             $username = $userIdentity->username;
-
             $rightItems[] = [
                 'label' => '<div class="user-icon-wrapper">'
                     . Html::encode($username)
@@ -145,33 +145,41 @@ $this->registerCssFile('@web/css/main.css', [
         </div>
     </main>
 
-    <footer id="footer" class="mt-auto py-3">
-        <?php if ($this->beginCache('footer-cache', ['duration' => 3600])): ?>
-            <div class="container">
-                <div class="footer-grid">
-                    <div class="footer-info">
-                        <img src="<?= Yii::getAlias('@web/logo.png') ?>" alt="<?= Yii::$app->name ?>" class="footer-logo">
-                        <p>Comunità di sviluppatori e appassionati di gaming</p>
-                    </div>
-                    <div class="footer-links">
-                        <h5>Link utili</h5>
-                        <ul>
-                            <li><a href="<?= Yii::$app->urlManager->createUrl(['site/about']) ?>">Chi siamo</a></li>
-                            <li><a href="<?= Yii::$app->urlManager->createUrl(['site/contact']) ?>">Contattaci</a></li>
-                        </ul>
-                    </div>
+    <footer id="footer" class="mt-auto py-4">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <img src="<?= Yii::getAlias('@web/logo.png') ?>" alt="<?= Yii::$app->name ?>" class="footer-logo">
+                    <p>Comunità di sviluppatori e appassionati di gaming. Innovazione, codice e divertimento in un unico
+                        posto.</p>
                 </div>
-                <div class="footer-divider"></div>
-                <div class="row text-muted">
-                    <div class="col-md-6 text-center text-md-start">
-                        &copy; GXE Devs <?= date('Y') ?> // Sito ancora in corso di sviluppo
-                    </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <?= Yii::powered() ?>
-                    </div>
+                <div class="footer-links">
+                    <h5>Link utili</h5>
+                    <ul>
+                        <li><a href="<?= Yii::$app->urlManager->createUrl(['site/about']) ?>">Chi siamo</a></li>
+                        <li><a href="<?= Yii::$app->urlManager->createUrl(['site/contact']) ?>">Contattaci</a></li>
+                        <li><a href="<?= Yii::$app->urlManager->createUrl(['site/privacy']) ?>">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h5>Seguici</h5>
+                    <ul>
+                        <li><a href="#"><i class="bi bi-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="bi bi-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="bi bi-instagram"></i> Instagram</a></li>
+                    </ul>
                 </div>
             </div>
-            <?php $this->endCache(); endif; ?>
+            <div class="footer-divider"></div>
+            <div class="row text-muted">
+                <div class="col-md-6 text-center text-md-start">
+                    &copy; GXE Devs <?= date('Y') ?> // Sito in evoluzione
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <?= Yii::powered() ?>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <?php $this->endBody() ?>
