@@ -146,30 +146,32 @@ $this->registerCssFile('@web/css/main.css', [
     </main>
 
     <footer id="footer" class="mt-auto py-3">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-info">
-                    <img src="<?= Yii::getAlias('@web/logo.png') ?>" alt="<?= Yii::$app->name ?>" class="footer-logo">
-                    <p>Comunità di sviluppatori e appassionati di gaming</p>
+        <?php if ($this->beginCache('footer-cache', ['duration' => 3600])): ?>
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-info">
+                        <img src="<?= Yii::getAlias('@web/logo.png') ?>" alt="<?= Yii::$app->name ?>" class="footer-logo">
+                        <p>Comunità di sviluppatori e appassionati di gaming</p>
+                    </div>
+                    <div class="footer-links">
+                        <h5>Link utili</h5>
+                        <ul>
+                            <li><a href="<?= Yii::$app->urlManager->createUrl(['site/about']) ?>">Chi siamo</a></li>
+                            <li><a href="<?= Yii::$app->urlManager->createUrl(['site/contact']) ?>">Contattaci</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="footer-links">
-                    <h5>Link utili</h5>
-                    <ul>
-                        <li><a href="<?= Yii::$app->urlManager->createUrl(['site/about']) ?>">Chi siamo</a></li>
-                        <li><a href="<?= Yii::$app->urlManager->createUrl(['site/contact']) ?>">Contattaci</a></li>
-                    </ul>
+                <div class="footer-divider"></div>
+                <div class="row text-muted">
+                    <div class="col-md-6 text-center text-md-start">
+                        &copy; GXE Devs <?= date('Y') ?> // Sito ancora in corso di sviluppo
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <?= Yii::powered() ?>
+                    </div>
                 </div>
             </div>
-            <div class="footer-divider"></div>
-            <div class="row text-muted">
-                <div class="col-md-6 text-center text-md-start">
-                    &copy; GXE Devs <?= date('Y') ?> // Sito ancora in corso di sviluppo
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <?= Yii::powered() ?>
-                </div>
-            </div>
-        </div>
+            <?php $this->endCache(); endif; ?>
     </footer>
 
     <?php $this->endBody() ?>
