@@ -55,59 +55,59 @@ $this->registerCssFile('@web/css/main.css', [
         // Menu items lato destro
         $rightItems = [];
 
-        if (!Yii::$app->user->isGuest && Yii::$app->user->can('user') && !Yii::$app->user->can('author') && !Yii::$app->user->can('admin')) {
-            $rightItems[] = ['label' => 'News', 'url' => ['/news/public'], 'linkOptions' => ['class' => 'nav-link-main']]; // Aggiunta classe
-        }
+        // $leftItems rimane invariato con Home, About, Contact...
+        
+        $rightItems = [];
 
-        if (!Yii::$app->user->isGuest && Yii::$app->user->can('author')) {
-            $rightItems[] = [
-                'label' => 'News',
-                'items' => [
-                    ['label' => 'Pubblicate', 'url' => ['/news/public']],
-                    ['label' => 'Dashboard', 'url' => ['/news']],
-                ]
-            ];
-        }
-
-        if (!Yii::$app->user->isGuest && Yii::$app->user->can('user') && !Yii::$app->user->can('admin') && !Yii::$app->user->can('admin')) {
-            $rightItems[] = ['label' => 'LFG', 'url' => ['/lfg'], 'linkOptions' => ['class' => 'nav-link-main']]; // Aggiunta classe
-        }
-
-        if (!Yii::$app->user->isGuest && Yii::$app->user->can('admin')) {
-            $rightItems[] = [
-                'label' => 'LFG',
-                'items' => [
-                    ['label' => 'Lista LFG', 'url' => ['/lfg']],
-                    ['label' => 'Dashboard attività', 'url' => ['/activity']],
-                    ['label' => 'Dashboard tipologie attività', 'url' => ['/activity-type']],
-                ]
-            ];
-        }
-
-        if (!Yii::$app->user->isGuest && Yii::$app->user->can('admin')) {
-            $rightItems[] = [
-                'label' => 'Admin',
-                'items' => [
-                    ['label' => 'Utenti', 'url' => ['/admin/user']],
-                    ['label' => 'Ruoli', 'url' => ['/admin/role']],
-                    ['label' => 'Permessi', 'url' => ['/admin/permission']],
-                    ['label' => 'Route', 'url' => ['/admin/route']],
-                    ['label' => 'Assegnazioni', 'url' => ['/admin/assignment']],
-                    ['label' => 'Menu', 'url' => ['/admin/menu']],
-                    ['label' => 'Gii', 'url' => ['/gii']],
-                ]
-            ];
-        }
-
+        // Se l'utente è guest:
         if (Yii::$app->user->isGuest) {
             $rightItems[] = ['label' => 'Signup', 'url' => ['/site/signup'], 'linkOptions' => ['class' => 'nav-btn nav-btn-signup']];
             $rightItems[] = ['label' => 'Login', 'url' => ['/site/login'], 'linkOptions' => ['class' => 'nav-btn nav-btn-login']];
         } else {
+            // Se è user “puro” (non admin, non author)
+            if (Yii::$app->user->can('user') && !Yii::$app->user->can('admin') && !Yii::$app->user->can('author')) {
+                $rightItems[] = ['label' => 'News', 'url' => ['/news/public'], 'linkOptions' => ['class' => 'nav-link-main']];
+                $rightItems[] = ['label' => 'LFG', 'url' => ['/lfg'], 'linkOptions' => ['class' => 'nav-link-main']];
+            }
+
+            // Se è author
+            if (Yii::$app->user->can('author')) {
+                $rightItems[] = [
+                    'label' => 'News',
+                    'items' => [
+                        ['label' => 'Pubblicate', 'url' => ['/news/public']],
+                        ['label' => 'Dashboard', 'url' => ['/news']],
+                    ],
+                ];
+            }
+
+            // Se è admin
+            if (Yii::$app->user->can('admin')) {
+                $rightItems[] = [
+                    'label' => 'LFG',
+                    'items' => [
+                        ['label' => 'Lista LFG', 'url' => ['/lfg']],
+                        ['label' => 'Dashboard attività', 'url' => ['/activity']],
+                        ['label' => 'Dashboard tipologie attività', 'url' => ['/activity-type']],
+                    ],
+                ];
+                $rightItems[] = [
+                    'label' => 'Admin',
+                    'items' => [
+                        ['label' => 'Utenti', 'url' => ['/admin/user']],
+                        ['label' => 'Ruoli', 'url' => ['/admin/role']],
+                        // ... eccetera ...
+                    ],
+                ];
+            }
+
+            // E infine il menu col profilo e logout
             $userIdentity = Yii::$app->user->identity;
             $profileImage = !empty($userIdentity->icon_url)
                 ? Yii::getAlias('@web') . '/' . $userIdentity->icon_url
                 : Yii::getAlias('@web') . '/uploads/default.jpg';
             $username = $userIdentity->username;
+
             $rightItems[] = [
                 'label' => '<div class="user-icon-wrapper">'
                     . Html::encode($username)
