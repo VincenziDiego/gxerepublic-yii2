@@ -31,59 +31,6 @@ body {
 }
 
 /* -----------------------------
-   NAVBAR (HEADER) RESPONSIVE
------------------------------ */
-.navbar {
-  background-color: #111;
-  padding: 0.5rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-}
-.navbar-brand {
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.4rem;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-.navbar-brand:hover {
-  color: var(--primary-color);
-}
-.navbar-menu {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-.navbar-menu a {
-  color: #ccc;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-  font-size: 0.95rem;
-}
-.navbar-menu a:hover {
-  color: #fff;
-}
-.navbar-toggler {
-  display: none;
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-size: 1.4rem;
-  cursor: pointer;
-}
-@media (max-width: 768px) {
-  .navbar-menu {
-    display: none; /* Da gestire con JS se vuoi un menu a tendina */
-  }
-  .navbar-toggler {
-    display: block;
-  }
-}
-
-/* -----------------------------
    EFFETTO RIPPLE SUI PULSANTI
 ----------------------------- */
 .btn {
@@ -121,16 +68,15 @@ body {
   background: url("/uploads/high-quality-hero.jpg") no-repeat center center !important;
   background-size: cover !important;
   background-attachment: fixed;
-  height: 70vh; /* ridotto un po' */
+  height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   border-radius: var(--border-radius-hero);
-  margin: 0 auto 1.5rem;
+  margin: 2rem auto 1.5rem; /* Rimuovi il margin-top negativo */
   overflow: hidden;
   padding: 0 1rem;
-  margin-top: -30px;
 }
 .hero-section::before {
   content: "";
@@ -345,159 +291,413 @@ body {
    SEZIONE "ULTIME NOTIZIE"
 ----------------------------- */
 .latest-news {
-  margin-top: 2rem; /* Spazio prima della sezione */
-  margin-bottom: 2rem; /* Spazio dopo la sezione */
-}
-
-.latest-news .section-header {
-  text-align: center;
-  margin-bottom: 1rem; /* Spazio sotto il titolo */
-}
-
-.latest-news .section-header h2 {
-  margin: 0; /* Rimuove eventuali margini di default */
-}
-
-.latest-news.container {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-.latest-news .section-header {
-  padding-top: 0.5rem !important;
-  margin-bottom: 0.5rem !important;
-}
-
-/* -----------------------------
-   NEWS CARD
------------------------------ */
-
-.news-row {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 1rem;
-  overflow-x: auto;
-  padding-bottom: 1rem;
-  justify-content: center;
-  align-items: stretch;
-  scroll-snap-type: x mandatory;
-}
-
-.news-card-container {
-  flex: 0 0 auto;
-  width: 300px;
-  scroll-snap-align: center;
-  margin-top: 0.5rem;
-  margin-right: 1.5rem; /* Aggiunge spazio a sinistra */
-}
-
-/* Se hai definito le variabili in :root, le richiami così */
-.news-gradient-card {
-  /* Dimensioni di base (adatta a piacere) */
-  width: 300px;
-  min-height: 220px; /* Puoi aumentare se vuoi più spazio verticale */
-
-  /* Gradiente con le tue variabili */
-  background-image: linear-gradient(
-    43deg,
-    var(--dark-accent) 0%,
-    /* #5451d2 */ var(--secondary-color) 46%,
-    /* #7be2f9 */ var(--accent-color) 100% /* #ffa098 */
-  );
-
-  border-radius: var(--border-radius-card); /* 10px */
-  color: var(--text-color); /* #fff */
-  overflow: hidden;
+  margin: 4rem 0;
   position: relative;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-
-  /* Usa la velocità definita in var(--transition-speed), es. 0.3s */
-  transition: all var(--transition-speed) cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: var(--box-shadow-card); /* 0 2px 6px rgba(0, 0, 0, 0.4) */
-  margin: 0 auto 1rem;
-  cursor: pointer;
+  padding: 2rem 0;
 }
 
-.news-gradient-card .card-content {
-  padding: 20px;
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  color: inherit; /* Usa var(--text-color) */
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: 100%;
-}
-
-.news-gradient-card .card-title {
-  font-size: 1.2rem; /* Riduci o aumenta a piacere */
-  font-weight: 700;
-  text-transform: uppercase;
-  margin: 0;
-  color: inherit;
-}
-
-.news-gradient-card .card-para {
-  font-size: 0.9rem;
-  opacity: 0.9;
-  color: inherit;
-  line-height: 1.3;
-}
-
-/* Effetto 3D al passaggio del mouse */
-.news-gradient-card:hover {
-  transform: rotateY(10deg) rotateX(10deg) scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* Effetto “strisciata” sulle pseudo-classi :before e :after */
-.news-gradient-card::before,
-.news-gradient-card::after {
+/* Sfondo con effetto di profondità */
+.latest-news::before {
   content: "";
   position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(18, 18, 24, 0.7), transparent);
+  z-index: -1;
+  border-radius: 16px;
+}
+
+.latest-news .section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.latest-news .section-header h2 {
+  font-size: 2.5rem;
+  margin: 0;
+  color: var(--primary-color);
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Linea decorativa sotto il titolo */
+.latest-news .section-header h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--primary-color),
+    transparent
+  );
+}
+
+/* -----------------------------
+   NEWS CARDS CONTAINER
+----------------------------- */
+.news-row {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: stretch;
+  padding: 1rem 2rem 2rem;
+  position: relative;
+  perspective: 1000px;
+}
+
+/* Scroller personalizzato per overflow-x */
+.news-row::-webkit-scrollbar {
+  height: 8px;
+}
+
+.news-row::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.news-row::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+.news-card-container {
+  flex: 0 0 calc(33.33% - 2rem);
+  min-width: 300px;
+  max-width: 400px;
+  margin: 0;
+  transform: translateZ(0);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.news-card-container:hover {
+  transform: translateZ(20px);
+  z-index: 2;
+}
+
+/* -----------------------------
+   NEWS CARD DESIGN
+----------------------------- */
+.news-gradient-card {
+  width: 100%;
+  min-height: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 0 30px rgba(66, 153, 225, 0.1);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  background-size: 150% 150%;
+  background-position: center;
+  background-image: linear-gradient(
+    135deg,
+    var(--dark-accent) 0%,
+    var(--secondary-color) 50%,
+    var(--accent-color) 100%
+  );
+  animation: gradientAnimation 15s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Overlay con effetto di profondità */
+.news-gradient-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
-  transition: transform var(--transition-speed) cubic-bezier(0.23, 1, 0.32, 1);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.2)
+  );
   z-index: 1;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
 }
 
-.news-gradient-card::before {
-  left: 0;
-}
 .news-gradient-card:hover::before {
-  transform: translateX(-100%);
+  opacity: 0.5;
 }
 
+/* Effetto di bordo luminoso */
 .news-gradient-card::after {
-  right: 0;
-}
-.news-gradient-card:hover::after {
-  transform: translateX(100%);
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    transparent,
+    var(--accent-color)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  /* Per schermi fino a 768px (tablet e mobile), 
-     cambia la direzione in colonna */
+.news-gradient-card:hover::after {
+  opacity: 1;
+}
+
+.news-gradient-card .card-content {
+  padding: 2rem;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  text-align: left;
+}
+
+/* Titolo delle news */
+.news-gradient-card .card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.news-gradient-card .card-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--primary-color);
+  border-radius: 3px;
+}
+
+/* Paragrafo delle news */
+.news-gradient-card .card-para {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+}
+
+/* Stile per autore e data */
+.news-gradient-card .author-info {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+  color: var(--primary-color);
+}
+
+.news-gradient-card .date-info {
+  display: block;
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 0.8rem;
+}
+
+.news-gradient-card .news-preview {
+  display: block;
+  line-height: 1.5;
+}
+
+/* Badge per la data */
+.news-gradient-card .card-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--primary-color);
+  color: #000;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  z-index: 3;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Indicatore di lettura completa */
+.news-gradient-card .card-action-hint {
+  margin-top: auto;
+  text-align: right;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  font-weight: 500;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.news-gradient-card .card-action-hint span {
+  display: inline-block;
+  padding-right: 20px;
+  position: relative;
+}
+
+.news-gradient-card .card-action-hint span::after {
+  content: "→";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+.news-gradient-card:hover .card-action-hint {
+  opacity: 1;
+}
+
+.news-gradient-card:hover .card-action-hint span::after {
+  transform: translate(5px, -50%);
+}
+
+/* Effetto hover sulla card */
+.news-gradient-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 50px rgba(66, 153, 225, 0.2);
+}
+
+/* Effetto pulse al hover */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(66, 153, 225, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(66, 153, 225, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(66, 153, 225, 0);
+  }
+}
+
+.news-gradient-card:hover {
+  animation: pulse 1.5s infinite;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
   .news-row {
-    flex-direction: column;
-    align-items: center;
-    /* Se hai impostato overflow-x: auto, 
-       per evitare scorrimento orizzontale su mobile: */
-    overflow-x: visible;
+    gap: 1.5rem;
+    padding: 1rem 1.5rem 2rem;
   }
 
   .news-card-container {
-    width: 100%;
-    max-width: 400px; /* oppure 100% se vuoi l'intera larghezza */
-    margin: 0.5rem 0; /* margine verticale fra le card */
+    flex: 0 0 calc(50% - 1.5rem);
+  }
+}
+
+@media (max-width: 992px) {
+  .news-row {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2rem;
+  }
+
+  .news-card-container {
+    flex: 0 0 85%;
+    max-width: 400px;
+    scroll-snap-align: center;
+  }
+
+  .latest-news .section-header h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .latest-news {
+    margin: 3rem 0;
+  }
+
+  .news-row {
+    padding: 0.5rem 1rem 2rem;
+  }
+
+  .news-card-container {
+    flex: 0 0 90%;
+  }
+
+  .latest-news .section-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .news-gradient-card {
+    min-height: 250px;
+  }
+
+  .news-gradient-card .card-content {
+    padding: 1.5rem;
+  }
+
+  .news-gradient-card .card-title {
+    font-size: 1.3rem;
+  }
+
+  .news-gradient-card .card-para {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .latest-news {
+    margin: 2rem 0;
+  }
+
+  .news-row {
+    padding: 0.5rem 0.5rem 1.5rem;
+  }
+
+  .news-card-container {
+    flex: 0 0 85%;
+    min-width: 250px;
+  }
+
+  .latest-news .section-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .news-gradient-card .card-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .news-gradient-card .card-para {
+    font-size: 0.9rem;
+  }
+
+  .news-gradient-card .card-badge {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+  }
+
+  .news-gradient-card .card-action-hint {
+    font-size: 0.8rem;
   }
 }
 

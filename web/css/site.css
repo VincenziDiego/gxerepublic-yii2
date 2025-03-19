@@ -4,24 +4,45 @@
 @import "variables.css";
 
 /* -----------------------------
-   CONTAINER PRINCIPALE
+   RESET GLOBALE E STILI BASE
 ----------------------------- */
-/* Padding per il contenuto principale */
-main > .container {
-  padding: 70px 15px 20px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-body);
+  font-family: "Roboto", sans-serif;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* -----------------------------
+   LAYOUT PRINCIPALE - PADDING OTTIMIZZATO
+----------------------------- */
+/* Utilizziamo una classe specifica per il padding anziché applicarlo a tutti i container */
+.content-container {
+  padding-top: 70px;
+  padding-bottom: 20px;
+}
+
+/* Per pagine specifiche che necessitano di padding laterale */
+.with-side-padding {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 /* -----------------------------
    STILI FOOTER
 ----------------------------- */
-/* Footer con background chiaro e dimensioni specifiche */
 .footer {
   background-color: #f5f5f5;
   font-size: 0.9em;
   height: 60px;
 }
 
-/* Padding interno per il container del footer */
 .footer > .container {
   padding-right: 15px;
   padding-left: 15px;
@@ -30,7 +51,6 @@ main > .container {
 /* -----------------------------
    UTILITÀ E MESSAGGI DI STATO
 ----------------------------- */
-/* Classe per evidenziare elementi non impostati */
 .not-set {
   color: #c55;
   font-style: italic;
@@ -39,7 +59,6 @@ main > .container {
 /* -----------------------------
    ICONE DI ORDINAMENTO PER GRIDVIEW
 ----------------------------- */
-/* Aggiunge icone per l'ordinamento ascendente e discendente */
 a.asc:after,
 a.desc:after {
   content: "";
@@ -62,7 +81,6 @@ a.desc:after {
   border-bottom-width: 0;
 }
 
-/* Previene il wrapping del testo nelle intestazioni della gridview */
 .grid-view th {
   white-space: nowrap;
 }
@@ -70,14 +88,12 @@ a.desc:after {
 /* -----------------------------
    MESSAGGI DI AIUTO E ERRORI
 ----------------------------- */
-/* Stile per blocchi di suggerimenti */
 .hint-block {
   display: block;
   margin-top: 5px;
   color: #999;
 }
 
-/* Stile per riepiloghi di errori */
 .error-summary {
   color: #a94442;
   background: #fdf7f7;
@@ -89,23 +105,11 @@ a.desc:after {
 /* -----------------------------
    STILI PER IL PULSANTE DI LOGOUT NELLA NAVBAR
 ----------------------------- */
-/* Allinea il pulsante logout nel menu della navbar */
 .nav li > form > button.logout {
   padding-top: 7px;
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* Versione responsive per schermi piccoli */
-@media (max-width: 767px) {
-  .nav li > form > button.logout {
-    display: block;
-    text-align: left;
-    width: 100%;
-    padding: 10px 0;
-  }
-}
-
-/* Effetti di hover e focus per il pulsante logout */
 .nav > li > form > button.logout:focus,
 .nav > li > form > button.logout:hover {
   text-decoration: none;
@@ -116,15 +120,22 @@ a.desc:after {
   outline: none;
 }
 
+@media (max-width: 767px) {
+  .nav li > form > button.logout {
+    display: block;
+    text-align: left;
+    width: 100%;
+    padding: 10px 0;
+  }
+}
+
 /* -----------------------------
    STILI PER I FORM
 ----------------------------- */
-/* Spaziatura per i gruppi di form */
 .form-group {
   margin-bottom: 1rem;
 }
 
-/* Assicura che il testo e il cursore siano sempre bianchi negli input */
 .form-control {
   color: #fff !important;
   caret-color: #fff;
@@ -136,35 +147,14 @@ a.desc:after {
 }
 
 /* -----------------------------
-   RESET GLOBALE DEI MARGINI E PADDING
------------------------------ */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* -----------------------------
-   STILI GENERALI DEL BODY
------------------------------ */
-body {
-  background-color: var(--bg-body);
-  font-family: "Roboto", sans-serif;
-  color: var(--text-color);
-  line-height: 1.6;
-}
-
-/* -----------------------------
    ANIMAZIONI DI SCROLL REVEAL
 ----------------------------- */
-/* Inizialmente gli elementi sono nascosti */
 .scroll-reveal {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-/* Quando l’elemento entra in vista, viene visualizzato */
 .scroll-reveal.scrolled {
   opacity: 1;
   transform: translateY(0);
